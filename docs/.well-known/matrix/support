@@ -1,0 +1,9 @@
+{
+  "contacts": [
+    {
+      "matrix_id": "@+:tomfos.tr",
+      "email_address": "tom@tcpip.uk",
+      "role": "m.role.admin"
+    }
+  ]
+}

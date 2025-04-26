@@ -1,0 +1,115 @@
+site_name: Tom Foster
+site_url: https://tomfos.tr
+repo_name: tcpipuk/tomfos.tr
+repo_url: https://github.com/tcpipuk/tomfos.tr
+edit_uri: edit/live/docs
+copyright: |
+  Copyright © Tom Foster 2025<br>
+  Licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>
+exclude_docs: |
+  !.well-known
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/tcpipuk
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/tomfos.tr
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/tomfostr/
+
+extra_css:
+  - assets/stylesheets/extra.css
+extra_javascript:
+  - https://unpkg.com/mermaid/dist/mermaid.min.js
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+plugins:
+  - blog:
+      archive_toc: true
+      archive_url_date_format: yyyy
+      archive_url_format: "{date}"
+      categories_toc: true
+      categories_url_format: "{slug}"
+      post_date_format: full
+      post_readtime: false
+      post_url_date_format: yyyy/MM
+      post_url_format: "{date}/{slug}"
+  - git-revision-date-localized:
+      enable_creation_date: false
+      type: date
+  - meta
+  - minify:
+      cache_safe: true
+      htmlmin_opts:
+        remove_comments: true
+      minify_css: true
+      minify_html: true
+      minify_js: true
+      css_files:
+        - assets/stylesheets/extra.css
+      js_files: []
+  - privacy
+  - redirects:
+      redirect_maps: { "coc": "community.html" }
+  - search
+  - social
+  - tags
+theme:
+  name: material
+  custom_dir: docs/overrides
+  language: en
+  features:
+    - content.action.view
+    - navigation.expand
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.preview
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.prune
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.sections
+    - toc.follow
+    - toc.integrate
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    # Default to dark mode
+    - media: "(prefers-color-scheme)"
+      scheme: slate
+      primary: green
+      accent: grey
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      accent: grey
+      toggle:
+        icon: material/lightbulb
+        name: Switch to light mode
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: green
+      accent: grey
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode
