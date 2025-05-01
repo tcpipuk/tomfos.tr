@@ -1,3 +1,8 @@
+---
+title: Diving into the Matrix Ecosystem
+description: Explore the world of Matrix – the open standard for secure, decentralised communication. Learn how it works, why it matters, and find guides to run your own server.
+---
+
 # What is Matrix?
 
 Matrix is an open standard for secure, decentralised messaging that puts you in control. Unlike

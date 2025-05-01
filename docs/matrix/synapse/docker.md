@@ -1,5 +1,6 @@
 ---
-title: "Deploying Synapse with Docker: Docker Compose with Templates"
+title: "Deploying Synapse with Docker Compose"
+description: Streamline your Matrix Synapse Docker deployment! Learn how to use YAML templates and anchors in Docker Compose for a cleaner, more manageable configuration.
 ---
 
 # 1. Docker Compose with Templates

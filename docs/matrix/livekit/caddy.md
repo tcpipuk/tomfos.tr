@@ -1,3 +1,8 @@
+---
+title: LiveKit with Caddy Reverse Proxy
+description: Easy video calls! Deploy LiveKit effortlessly using the official generator which bundles Caddy for automatic HTTPS and simple setup. Matrix calls made easy.
+---
+
 # Deploying LiveKit with Caddy (Official Generator)
 
 This guide walks through deploying LiveKit using its official configuration generator. The nice thing

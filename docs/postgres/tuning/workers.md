@@ -1,6 +1,9 @@
-# Tuning PostgreSQL for a Matrix Synapse Homeserver
+---
+title: Tuning PostgreSQL Worker Processes
+description: Don't let slow workers create bottlenecks! Learn how to balance PostgreSQL worker processes with CPU cores for optimal latency and performance, essential for systems like Matrix Synapse.
+---
 
-## 2. Worker Configuration
+# 2. Worker Configuration
 
 1. [The Importance of Latency](#the-importance-of-latency)
 2. [Tuning Workers to CPU Cores](#tuning-workers-to-cpu-cores)
@@ -13,7 +16,7 @@ performing maintenance operations. Just like in Synapse, these extra threads are
 and the number of them and their configuration can have a huge influence on the performance of your
 database.
 
-### The Importance of Latency
+## The Importance of Latency
 
 Speed can be measured in multiple ways: some say "speed" when they mean "bandwidth", but in a
 realtime application like Synapse that can make hundreds (or thousands) of queries per second,
@@ -34,7 +37,7 @@ For Synapse and PostgreSQL, the goal is to strike a balance: we want to ensure t
 CPU-bound, and has enough computational resources to process queries efficiently. However, giving it
 excessive CPU resources only makes it IO-bound and unable to utilise all of that allocated power.
 
-### Tuning Workers to CPU Cores
+## Tuning Workers to CPU Cores
 
 The number of workers in PostgreSQL is closely tied to the number of available CPU cores because
 each worker process can perform tasks concurrently on a separate core. However, too many workers
@@ -72,13 +75,13 @@ one query requires a lock on a table, all other workers would need to wait to ac
 In this Synapse case, it's generally better to use parallelism when possible to speed up complex
 queries, rather than trying to enable the maximum amount of queries to be running at the same time.
 
-### Monitor CPU Utilisation
+## Monitor CPU Utilisation
 
 Use tools like `top`, `htop`, or `vmstat` to monitor CPU usage, or `docker stats` if using Docker.
 If the CPU utilisation of Postgres never exceeds 50-60%, consider reducing the number of workers to
 free up resources for Synapse and other processes.
 
-### Analysing Query Performance Time
+## Analysing Query Performance Time
 
 With `pg_stat_statements` enabled, you can now monitor the performance of your SQL statements.
 Here's a query to help you analyse the database's behaviour:
@@ -98,7 +101,7 @@ times that query was called, and the total execution time taken. The longest que
 the most common, but by comparing the average time before and after a change at each stage, you can
 gauge the impact of your optimisations.
 
-### Balance with Synapse
+## Balance with Synapse
 
 Remember, Synapse and PostgreSQL are two parts of the same team here, so test at each stage that
 adjustments made to the database don't adversely impact Synapse's performance.

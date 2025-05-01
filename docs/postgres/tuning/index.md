@@ -1,3 +1,8 @@
+---
+title: Introduction to Tuning PostgreSQL
+description: Why tune PostgreSQL? This guide introduces the basics of optimising PostgreSQL beyond its defaults for better performance, using Matrix Synapse as a key example.
+---
+
 # Tuning PostgreSQL for a Matrix Synapse Homeserver
 
 Welcome to the guide on fine-tuning PostgreSQL for your Matrix Synapse Homeserver. Matrix Synapse is

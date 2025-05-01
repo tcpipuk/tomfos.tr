@@ -1,3 +1,8 @@
+---
+title: Continuwuity with Docker
+description: Spin up your reliable Matrix homeserver the easy way with Docker. Containerise Continuwuity for simpler deployment and management. Less fuss, more chat!
+---
+
 # Deploying Continuwuity with Docker
 
 This guide covers deploying Continuwuity using Docker and Docker Compose, with several options for

@@ -1,6 +1,9 @@
-# Deploying a Synapse Homeserver with Docker
+---
+title: Scaling Synapse with Workers
+description: Unleash the full power of your Matrix Synapse homeserver! Learn how to configure workers to handle more users, bigger rooms, and faster federation.
+---
 
-## 5. Worker Configuration
+# 5. Worker Configuration
 
 1. [Introduction](#introduction)
 2. [Synapse Configuration](#synapse-configuration)
@@ -8,7 +11,7 @@
 4. [Worker Log Config](#worker-log-config)
 5. [Docker Configuration](#docker-configuration)
 
-### Introduction
+## Introduction
 
 Due to the way Python handles multiple CPU cores, a design decision was made in Synapse to allow
 splitting work out between multiple copies with defined roles, rather than trying to shoehorn many
@@ -26,7 +29,7 @@ I've also included an [explanation with a diagram](./README.md#model-explanation
 this page to help explain the rationale behind this design, and why it makes the best use of
 available CPU & RAM.
 
-### Synapse Configuration
+## Synapse Configuration
 
 In the [initial homeserver.yaml](./synapse.md#homeserver-config) we didn't reference any workers,
 so will want to add these now.
@@ -90,7 +93,7 @@ instance_map:
     path: "/sockets/synapse_replication_tasks1.sock"
 ```
 
-### Worker Config Files
+## Worker Config Files
 
 Firstly, I recommend these be stored in a subfolder of your Synapse directory (like "workers") so
 they're easier to organise.
@@ -144,7 +147,7 @@ worker_listeners:
 As above, I recommend having a separate log config for each type of worker to aid any investigation
 you need to do later, so will explain this in the following section:
 
-### Worker Log Config
+## Worker Log Config
 
 These have a [standard format](https://docs.python.org/3/library/logging.config.html), but here I
 have enabled buffered logging to lower disk I/O, and use a daily log to keep for 3 days before
@@ -193,12 +196,14 @@ root:
   handlers: [buffer]
 ```
 
-**Note:** While Synapse is running, each line in the log (after the timestamp) starts with a string
-like `synapse.util.caches.lrucache` so you can control exactly what is logged for each log type by
-adding some of them to the `loggers` section here. In this example, I've suppressed less informative
-logs to make the more important ones easier to follow.
+!!! note
 
-### Docker Configuration
+    While Synapse is running, each line in the log (after the timestamp) starts with a string like
+    `synapse.util.caches.lrucache` so you can control exactly what is logged for each log type by
+    adding some of them to the `loggers` section here. In this example, I've suppressed less
+    informative logs to make the more important ones easier to follow.
+
+## Docker Configuration
 
 Since we defined a "synapse-worker-template" and "synapse-media-template" in the previous
 [Docker Compose section](./docker.md#yaml-templating), these are very simple to define just below

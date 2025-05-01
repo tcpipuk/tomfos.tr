@@ -1,6 +1,9 @@
-# Setting Up a Replica for Backups for PostgreSQL in Docker
+---
+title: Performing PostgreSQL Backups
+description: Ready, set, backup! Explore different PostgreSQL backup methods, focusing on `pg_basebackup` for creating reliable physical backups. Don't get caught out.
+---
 
-## 4. Backup Script
+# 4. Backup Script
 
 I've written the following to take a backup - the files are automatically compressed using gzip
 before they're written to save space and minimise wear on your storage:
@@ -21,7 +24,7 @@ docker exec synapse-db-replica-1 pg_basebackup -h /sockets -U synapse -D $CURREN
 # Check if the backup was successful
 if [ $? -eq 0 ]; then
     echo "Backup successful! Compressing the backup directory..."
-    
+
     # Compress the backup directory
     tar -czf $CURRENT_BACKUP_ARCHIVE -C $CURRENT_BACKUP_DIR .
     rm -rf $CURRENT_BACKUP_DIR

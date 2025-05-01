@@ -1,5 +1,6 @@
 ---
 title: Community
+description: "Entering #space:tomfos.tr? Read the manual first. Community guidelines to ensure our corner of Matrix stays productive, respectful, and drama-free."
 hide:
   - path
 ---
@@ -18,36 +19,36 @@ all sides of an issue, but as this is volunteer-run, I may need to make moderati
 
 ### Do's
 
-* **Be respectful** of different viewpoints and experiences
-* **Communicate constructively** even when disagreeing
-* **Use inclusive language** that makes everyone feel welcome
-* **Give people the benefit of the doubt** before jumping to conclusions
-* **Accept feedback gracefully** when it's offered in good faith
+- **Be respectful** of different viewpoints and experiences
+- **Communicate constructively** even when disagreeing
+- **Use inclusive language** that makes everyone feel welcome
+- **Give people the benefit of the doubt** before jumping to conclusions
+- **Accept feedback gracefully** when it's offered in good faith
 
 ### Things to Avoid
 
-* **Argumentative behaviour** that derails conversations
-* **Personal attacks** or focusing criticism on people rather than ideas
-* **Offensive language or imagery** that makes others uncomfortable
-* **Spamming** or flooding channels with excessive content
-* **Harassment** in public or private channels
+- **Argumentative behaviour** that derails conversations
+- **Personal attacks** or focusing criticism on people rather than ideas
+- **Offensive language or imagery** that makes others uncomfortable
+- **Spamming** or flooding channels with excessive content
+- **Harassment** in public or private channels
 
 ## Moderation Approach
 
 As the community admin, I'll address issues as they arise, but note:
 
-* Moderation is done on a volunteer basis
-* I may need to mute/kick/ban without lengthy discussion if behaviour is clearly disruptive
-* Repeated problematic behaviour after warnings will lead to removal
-* I'll try to explain moderation decisions when possible, but can't guarantee extensive justification
+- Moderation is done on a volunteer basis
+- I may need to mute/kick/ban without lengthy discussion if behaviour is clearly disruptive
+- Repeated problematic behaviour after warnings will lead to removal
+- I'll try to explain moderation decisions when possible, but can't guarantee extensive justification
   in all cases
 
 ## Reporting Issues
 
 If you experience problems in any of my Matrix rooms:
 
-* Contact me directly on Matrix: [@+:tomfos.tr](https://matrix.to/#/@+:tomfos.tr)
-* Email: [tom@tcpip.uk](mailto:tom@tcpip.uk)
+- Contact me directly on Matrix: [@+:tomfos.tr](https://matrix.to/#/@+:tomfos.tr)
+- Email: [tom@tcpip.uk](mailto:tom@tcpip.uk)
 
 ## The Bottom Line
 

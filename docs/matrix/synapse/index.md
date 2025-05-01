@@ -1,3 +1,8 @@
+---
+title: Matrix Synapse Homeserver Guides
+description: Your comprehensive guide to deploying and managing a high-performance Matrix Synapse homeserver using Docker, Nginx, and PostgreSQL. Scale efficiently with workers!
+---
+
 # Matrix Synapse Homeserver Guides
 
 This section of my website aims to be a one-stop hub for getting into the Matrix ecosystem and

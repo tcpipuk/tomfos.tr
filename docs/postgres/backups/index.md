@@ -1,6 +1,9 @@
-# Setting Up a Replica for Backups for PostgreSQL in Docker
+---
+title: Introduction to PostgreSQL Backups
+description: Backing up isn't just good sense, it's essential. Discover why and how to safeguard your PostgreSQL data, especially for crucial applications like Matrix Synapse.
+---
 
-## Introduction
+# Setting Up a Replica for Backups for PostgreSQL in Docker
 
 Backing up a write-heavy database like Synapse can be a challenge: in my case, a dump of the
 database would take >15 minutes and cause all sorts of performance and locking issues in the

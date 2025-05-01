@@ -1,6 +1,9 @@
-# Tuning PostgreSQL for a Matrix Synapse Homeserver
+---
+title: Tuning PostgreSQL Checkpoints and WAL
+description: Smooth out disk I/O! Learn to tune PostgreSQL checkpoints and Write-Ahead Logging (WAL) for improved performance and durability, crucial for demanding workloads like Matrix Synapse.
+---
 
-## 6. Checkpoints and Replication
+# 6. Checkpoints and Replication
 
 1. [Understanding WAL and Checkpoints](#understanding-wal-and-checkpoints)
 2. [Checkpoint Configuration](#checkpoint-configuration)
@@ -14,7 +17,7 @@ database, consider setting up a dedicated replica - it won't _technically_ speed
 significantly decreases the performance impact of dumping the backup to disk, and backups typically
 complete faster too. You can find my guide on this [here](https://gist.github.com/tcpipuk/f68fb199ea8b1c1bdf48833fde86b418).
 
-### Understanding WAL and Checkpoints
+## Understanding WAL and Checkpoints
 
 Instead of writing each piece of data to the main database file when it arrives, PostgreSQL uses
 Write-Ahead Logging (WAL) to protect the main database by logging changes into a file as they occur.
@@ -27,7 +30,7 @@ In this process, Checkpoints are the points in time where PostgreSQL guarantees 
 changes have been written into the main database files, so tuning this is important to control disk
 I/O.
 
-### Checkpoint Configuration
+## Checkpoint Configuration
 
 - **`checkpoint_completion_target`**: Sets the target time for completing the checkpoint's writing
   work. The default is 0.5, but increasing this to 0.9 (90% of the checkpoint interval) helps to
@@ -35,7 +38,7 @@ I/O.
 - **`checkpoint_timeout`**: Sets the maximum time between checkpoints. This is 5 minutes by
   default, so increasing to 15 minutes can also help smooth out spikes in disk I/O.
 
-### WAL Size Configuration
+## WAL Size Configuration
 
 For these values, you can use the query from the [Shared Buffers](3-memory.md#shared-buffers)
 section to see how much of the `shared_buffers` are consumed by new changes in the checkpoint
@@ -49,7 +52,7 @@ window.
   setting this to an ample figure helps to reduce disk I/O when there is a spike in changes over
   the checkpoint window. I typically set this to double the `shared_buffers` value.
 
-### WAL Level Configuration
+## WAL Level Configuration
 
 - If not using replication, set `wal_level = minimal` to keep the WAL efficient with only the data
   required to restore after a crash.

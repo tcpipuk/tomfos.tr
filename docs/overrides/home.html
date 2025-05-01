@@ -1,7 +1,8 @@
 {% extends "main.html" %}
 {% block hero %}
   <div class="mdx-parallax" data-mdx-component="parallax">
-    <section class="mdx-parallax__group" data-md-color-scheme="slate">
+    {# Group 1: Hero Visuals (Background layers, Portrait, Text) #}
+    <section class="mdx-parallax__group hero-visuals" data-md-color-scheme="slate">
       <picture class="mdx-parallax__layer backdrop-layer"
                style="--md-parallax-depth: 9">
         <img src="assets/images/parallax-backdrop.webp"
@@ -39,69 +40,114 @@
         </div>
       </div>
     </section>
-    <section class="mdx-parallax__group content-group">
+    {# Group 2: Main Page Content #}
+    <section class="mdx-parallax__group page-content-group">
+      {# Use the standard md-content structure for proper styling #}
       <div class="md-content md-grid" data-md-component="content">
-        <div class="md-content__inner md-typeset" id="main-content">{{ page.content }}</div>
+        <div class="md-content__inner md-typeset">
+          {# Render the actual markdown content from index.md here #}
+          {{ page.content }}
+        </div>
       </div>
     </section>
   </div>
+  {# End of mdx-parallax container #}
 {% endblock hero %}
+{# Prevent main.html from rendering content again outside the hero block #}
 {% block content %}
 {% endblock content %}
 {% block styles %}
   {{ super() }}
   <style>
+    /* Parallax container: MUST be scrollable for effect to work */
     .mdx-parallax {
-      height: 90vh;
+      height: 100vh;
       overflow-y: auto;
       overflow-x: hidden;
       perspective: 400px;
       perspective-origin: 50% 50%;
       scroll-behavior: smooth;
-      position: relative;
-      top: 90vh;
-      margin-top: calc(-1 * 90vh);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
     }
+
+    /* Each major section (hero visuals, content) within the parallax area */
     .mdx-parallax__group {
-      height: 90vh;
       position: relative;
       transform-style: preserve-3d;
     }
+
+    /* Group 1: Hero Visuals */
+    .hero-visuals {
+      height: 90vh;
+      z-index: 1;
+    }
+
+    /* Group 2: Page Content */
+    .page-content-group {
+      height: 120vh;
+      background-color: var(--md-default-bg-color);
+      position: relative;
+      z-index: 2;
+      transform: translateZ(0);
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    /* Standard content container styling */
+    .page-content-group .md-content__inner {
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+
+    /* Common styles for layers */
     .mdx-parallax__layer {
       position: absolute;
       inset: 0;
       transform-origin: 50% 50% 0;
       transform: translateZ(calc(var(--md-parallax-depth, 1) * -100px)) scale(calc(1 + var(--md-parallax-depth, 1) / 3));
     }
+
+    /* Z-indexing within the hero visual group */
+    .hero-visuals .mdx-parallax__layer { z-index: 1; }
+    .hero-visuals .mdx-parallax__blend { z-index: 2; }
+    .hero-visuals .mdx-hero { z-index: 3; }
+
+    /* Image specifics */
     .mdx-parallax__image {
-      position: absolute;
-      bottom: 0;
-      left: var(--md-image-position, 50%);
-      object-fit: cover;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 100%;
+      position: absolute; bottom: 0; left: var(--md-image-position, 50%);
+      object-fit: cover; transform: translateX(-50%); width: 100%; height: 100%;
     }
-    .tree-layer .mdx-parallax__image {
-      top: 8vh;
-      height: 85vh;
-      object-fit: contain;
-    }
+    .tree-layer .mdx-parallax__image { top: 8vh; height: 85vh; object-fit: contain; }
+    .portrait-layer .mdx-parallax__image { max-width: 70vh; height: auto; }
 
-    .portrait-layer .mdx-parallax__image {
-        min-width: auto;
-        min-height: auto;
-        max-width: 70vh;
-        height: auto;
-    }
+    /* --- Page Structure Adjustments --- */
 
-    /* Hide sidebar nav on desktop */
+    /* Prevent default margins/paddings when using this template */
+     body[data-md-template="home"] .md-main__inner {
+         margin-top: 0 !important;
+         padding-top: 0 !important;
+     }
+    /* Hide sidebars */
     @media screen and (min-width: 76.1875em) {
       .md-sidebar--primary {display: none;}
     }
 
-    /* Tweak positioning for narrow windows (tablets, etc) */
-    @media screen and (max-width: 64.25em) {
+    /* Ensure header stays on top */
+    .md-header {
+      position: sticky; top: 0;
+    }
+    /* Ensure footer appears *after* the parallax container ends */
+    .md-footer {
+       z-index: 3;
+    }
+
+
+    /* --- Responsive --- */
+    @media screen and (max-width: 64.25em) { /* Tablet */
       .backdrop-layer {--md-image-position: 42% !important;}
       .tree-layer {--md-image-position: 30% !important;}
       .tree-layer .mdx-parallax__image { width: 45vh !important; }
@@ -109,9 +155,7 @@
       .portrait-layer .mdx-parallax__image { width: 50vh !important; }
       .mdx-hero__teaser p { font-size: 1.3rem !important; }
     }
-
-    /* Positioning for mobile devices */
-    @media screen and (max-width: 30em) {
+    @media screen and (max-width: 30em) { /* Mobile */
       .backdrop-layer {--md-image-position: 45% !important;}
       .tree-layer {--md-image-position: 35% !important;}
       .tree-layer .mdx-parallax__image { width: 45vh !important; }
@@ -119,120 +163,23 @@
       .portrait-layer .mdx-parallax__image { width: 55vh !important; }
       .mdx-hero__teaser { max-width: 10rem !important; }
       .mdx-hero__teaser p { font-size: 1.1rem !important; }
-      .content-group .md-content__inner { padding: 0 1rem !important; }
+      .page-content-group .md-content__inner { padding: 0 1rem !important; }
     }
 
-    .mdx-parallax__blend {
-      background-image: linear-gradient(to bottom, rgba(0,0,0,.0), rgba(0,0,0,.6));
-      z-index: 1;
-      transform: translateZ(0);
-    }
+    /* Hero text specifics */
+    .mdx-hero { color: var(--md-primary-bg-color); }
+    .mdx-hero__scrollwrap { height: 80vh; display: flex; justify-content: end; flex-direction: column; }
+    .mdx-hero__inner { padding: 1.6rem; text-align: right; position: relative; width: 100%; max-width: 50rem; margin: 0 auto; }
+    .mdx-hero__teaser { margin-right: 0; margin-left: auto; max-width: 25rem; text-align: right; }
+    .mdx-hero__teaser h1 { color: var(--md-primary-bg-color); font-weight: 700; margin-bottom: 0.5rem; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+    .mdx-hero__teaser p { color: var(--md-primary-bg-color); font-size: 1.2rem; margin: 0; opacity: 0.9; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+    .mdx-hero__more { color: var(--md-primary-bg-color); fill: var(--md-primary-bg-color); position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); opacity: 0.7; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); } 40% { transform: translate(-50%, -10px); } 60% { transform: translate(-50%, -5px); } }
+    .mdx-hero__more svg { height: 2rem; width: 2rem; display: block; margin: 0 auto; }
 
+    /* Card styling */
+    .grid.cards { margin-top: 0; } /* Reset margin, handled by group padding */
+    .md-card-content h3 .fa, .md-card-content h3 .fab, .md-card-content h3 .fas { margin-right: 0.5em; vertical-align: middle; width: 1.25em; text-align: center; }
 
-    .mdx-hero {
-      color: var(--md-primary-bg-color);
-      position: relative;
-      z-index: 2;
-    }
-    .mdx-hero__scrollwrap {
-      height: 80vh;
-      display: flex;
-      justify-content: end;
-      flex-direction: column;
-    }
-    .mdx-hero__inner {
-      padding: 1.6rem;
-      text-align: right;
-      position: relative;
-      width: 100%;
-      max-width: 50rem;
-      margin: 0 auto;
-    }
-    .mdx-hero__teaser {
-      margin-right: 0;
-      margin-left: auto;
-      max-width: 25rem;
-      text-align: right;
-    }
-    .mdx-hero__teaser h1 {
-      color: var(--md-primary-bg-color);
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    }
-    .mdx-hero__teaser p {
-      color: var(--md-primary-bg-color);
-      font-size: 1.2rem;
-      margin: 0;
-      opacity: 0.9;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    }
-    .mdx-hero__more {
-      color: var(--md-primary-bg-color);
-      fill: var(--md-primary-bg-color);
-      position: absolute;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0.7;
-      animation: bounce 2s infinite;
-    }
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-      40% { transform: translate(-50%, -10px); }
-      60% { transform: translate(-50%, -5px); }
-    }
-    .mdx-hero__more svg {
-      height: 2rem;
-      width: 2rem;
-      display: block;
-      margin: 0 auto;
-    }
-
-
-    .content-group {
-      min-height: 90vh;
-      height: auto;
-      background-color: var(--md-default-bg-color);
-      position: relative;
-      z-index: 4;
-      transform: translateZ(0);
-    }
-
-    .content-group .md-content__inner {
-      max-width: 48rem;
-      margin: 0 auto;
-    }
-
-
-     /* Ensure header stays visible */
-    .md-header {
-      position: sticky;
-      top: 0;
-    }
-
-     body[data-md-template="home"] .md-main__inner {
-         margin: 0;
-         padding: 0;
-     }
-
-     body[data-md-template="home"] .md-sidebar--secondary {
-         display: none;
-     }
-
-
-    .grid.cards {
-      margin-top: 3rem;
-    }
-    .md-card-content h3 .fa,
-    .md-card-content h3 .fab,
-    .md-card-content h3 .fas {
-      margin-right: 0.5em;
-      vertical-align: middle;
-      width: 1.25em;
-      text-align: center;
-    }
   </style>
 {% endblock styles %}
-{% block footer %}
-{% endblock footer %}

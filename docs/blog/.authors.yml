@@ -2,6 +2,6 @@ authors:
   tom:
     name: Tom Foster
     description: A person
-    avatar: https://tomfos.tr/images/tom.jpg
+    avatar: https://tomfos.tr/assets/images/icon.svg
     slug: tom
     url: https://tomfos.tr

@@ -1,3 +1,8 @@
+---
+title: SSL Certificates for Matrix
+description: Keep your Matrix server secure with SSL! Learn how to get and manage certificates with Certbot. No eavesdroppers allowed!
+---
+
 # SSL Certificates for Matrix Servers
 
 This guide covers obtaining SSL certificates for your Matrix homeserver using Certbot. We'll cover

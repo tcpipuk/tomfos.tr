@@ -1,3 +1,8 @@
+---
+title: Caddy Reverse Proxy for Continuwuity
+description: Easy mode enabled! Set up Caddy as a simple, auto-HTTPS reverse proxy for your Continuwuity Matrix server. Secure connections, zero fuss.
+---
+
 # Configuring Caddy for Continuwuity
 
 This guide covers setting up Caddy as a reverse proxy for Continuwuity. Caddy is recommended for new

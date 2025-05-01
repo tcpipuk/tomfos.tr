@@ -1,6 +1,9 @@
-# Setting Up a Replica for Backups for PostgreSQL in Docker
+---
+title: Configuring PostgreSQL for Backups
+description: Unlock robust backups by tweaking PostgreSQL's settings. Configure WAL levels and other parameters for effective point-in-time recovery (PITR).
+---
 
-## 2. Configuration
+# 2. Configuration
 
 1. **Primary Postgres Configuration**:
 

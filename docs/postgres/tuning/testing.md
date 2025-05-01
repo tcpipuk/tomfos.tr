@@ -1,6 +1,9 @@
-# Tuning PostgreSQL for a Matrix Synapse Homeserver
+---
+title: Testing PostgreSQL Tuning Changes
+description: Tuning complete? Not quite! Learn how to test your PostgreSQL adjustments using connection monitoring, query analysis with `pg_stat_statements`, and continuous iteration to nail that performance balance.
+---
 
-## 8. Testing Methodology
+# 8. Testing Methodology
 
 1. [Monitor Database Connections](#monitor-database-connections)
 2. [Adjust Synapse Connection Limits](#adjust-synapse-connection-limits)
@@ -9,7 +12,7 @@
    2. [Slowest Queries by Type](#slowest-queries-by-type)
 4. [Continuous Monitoring and Iterative Tuning](#continuous-monitoring-and-iterative-tuning)
 
-### Monitor Database Connections
+## Monitor Database Connections
 
 You can use this query to see the number of active and idle connections open to each database:
 
@@ -32,7 +35,7 @@ ORDER BY datname;
 There's no harm in setting `max_connections = 500` in your postgresql.conf, however you may wish to
 control the amount of connections Synapse is making if it's hardly using them.
 
-### Adjust Synapse Connection Limits
+## Adjust Synapse Connection Limits
 
 By default, Synapse is tuned for a single process where all database communication is done by a
 single worker. When creating multiple (or dozens!) of workers to spread the load, each worker needs
@@ -61,12 +64,12 @@ logs showing database errors or advising that connections are prematurely closed
 to revert a small change now than to troubleshoot the source of a problem later after other changes
 have been made.
 
-### Analysing Query Performance
+## Analysing Query Performance
 
 The `pg_stat_statements` extension is a powerful tool for analysing query performance. There are
 many different ways to view the data, but below are a couple of examples to try:
 
-#### Slowest Queries
+### Slowest Queries
 
 This will give you the top 5 slowest queries, how many times they've been called, the total
 execution time, and average execution time:
@@ -81,7 +84,7 @@ ORDER BY mean_exec_time DESC
 LIMIT 5;
 ```
 
-#### Slowest Queries by Type
+### Slowest Queries by Type
 
 If you want to analyse a specific query pattern for slowness, you can filter by the query text:
 
@@ -100,7 +103,7 @@ This will help you identify places to optimise, for example in this example we'r
 being inserted into the database, but could just as easily look at large `SELECT` statements
 indexing lots of data.
 
-### Continuous Monitoring and Iterative Tuning
+## Continuous Monitoring and Iterative Tuning
 
 Tuning a PostgreSQL database for Synapse is an iterative process. Monitor the connections, query
 performance, and other vital statistics, then adjust the configuration as needed and observe the

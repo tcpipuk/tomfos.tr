@@ -1,19 +1,21 @@
-# Tuning PostgreSQL for a Matrix Synapse Homeserver
+---
+title: Optimising PostgreSQL Memory Configuration
+description: Give your PostgreSQL database the memory it craves! Learn to tune `shared_buffers`, `work_mem`, `effective_cache_size`, and more for peak performance, illustrated with Matrix Synapse examples.
+---
 
-## 3. Memory Configuration
+# 3. Memory Configuration
 
-1. [3. Memory Configuration](#3-memory-configuration)
-   1. [Shared Buffers](#shared-buffers)
-   2. [Shared Memory](#shared-memory)
-   3. [Effective Cache Size](#effective-cache-size)
-   4. [Working Memory](#working-memory)
-   5. [Maintenance Work Memory](#maintenance-work-memory)
+1. [Shared Buffers](#shared-buffers)
+2. [Shared Memory](#shared-memory)
+3. [Effective Cache Size](#effective-cache-size)
+4. [Working Memory](#working-memory)
+5. [Maintenance Work Memory](#maintenance-work-memory)
 
 Memory plays a pivotal role in the performance of your PostgreSQL database, as does using it
 efficiently in the right places. Having terrabytes of RAM would undoubtedly speed things up, but
 the benefit typically drops off quickly after a few gigabytes.
 
-### Shared Buffers
+## Shared Buffers
 
 The `shared_buffers` setting determines the amount of memory allocated for PostgreSQL to use for
 caching data. This cache is critical because it allows frequently accessed data to be served
@@ -64,7 +66,7 @@ As always, this is a rule of thumb. You may choose to allocate more RAM when you
 and want more of the database available in RAM. However, if you're using SSD/NVME storage, this
 could easily be a waste of RAM that could just as easily be returned to the OS to use as disk cache.
 
-### Shared Memory
+## Shared Memory
 
 Shared memory (specifically the `/dev/shm` area) plays a vital role in PostgreSQL's performance.
 It behaves like a ramdisk where files are temporarily stored in memory, and in PostgreSQL it's used
@@ -89,7 +91,7 @@ There is little value in setting this larger than `shared_buffers`, but the RAM 
 while PostgreSQL is using the space, so it's worth setting this to a similar size to
 `shared_buffers` if you can afford it.
 
-### Effective Cache Size
+## Effective Cache Size
 
 The `effective_cache_size` parameter helps the PostgreSQL query planner to estimate how much memory
 is available for disk caching by the operating system and PostgreSQL combined:
@@ -128,7 +130,7 @@ Here, although only about 3GB is "free", around 36GB is being used by the OS for
 whether to try accessing the disk, knowing the data is likely to be answered directly from the
 memory instead.
 
-### Working Memory
+## Working Memory
 
 The `work_mem` setting controls the amount of memory used for internal sort operations and hash
 tables instead of writing to temporary disk files:
@@ -167,7 +169,7 @@ regularly created.
 In practice, values above 32MB often don't make a noticeable difference for Synapse, but you may
 find higher values (like 64MB or even 128MB) help other applications such as Sliding Sync.
 
-### Maintenance Work Memory
+## Maintenance Work Memory
 
 Allocating memory for maintenance operations sets aside room for cleaning and organising your
 workspace. Properly configured, it helps ensure that routine maintenance doesn't disrupt your

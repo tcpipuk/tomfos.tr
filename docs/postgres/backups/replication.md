@@ -1,6 +1,9 @@
-# Setting Up a Replica for Backups for PostgreSQL in Docker
+---
+title: PostgreSQL Replication for High Availability
+description: Double trouble or double safe? Understand PostgreSQL replication to enhance data availability and protect against server failure. Keep your data flowing.
+---
 
-## 3. Starting Replication
+# 3. Starting Replication
 
 Once you run `docker compose up db-replica -d` your new replica should now be running.
 
@@ -19,7 +22,7 @@ The output should look something like this:
 (1 row)
 ```
 
-### Replica Logs
+## Replica Logs
 
 When running `docker logs synapse-db-replica-1` (adjusting your replica's name as necessary) we
 should now see messages distinct from the primary's typical "checkpoint" logs. Here's a concise

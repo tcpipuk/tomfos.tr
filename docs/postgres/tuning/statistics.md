@@ -1,6 +1,9 @@
-# Tuning PostgreSQL for a Matrix Synapse Homeserver
+---
+title: Enabling PostgreSQL Statistics Modules for Tuning
+description: Unlock essential PostgreSQL performance insights! Learn how to enable, manage, and reset the `pg_buffercache` and `pg_stat_statements` modules for effective database tuning.
+---
 
-## 1. Statistics Modules
+# 1. Statistics Modules
 
 1. [Enabling Statistics](#enabling-statistics)
 2. [Resetting Statistics](#resetting-statistics)
@@ -15,7 +18,7 @@ time - there's no direct harm in leaving them running, but if your objective is 
 performance, after enabling them and completing your investigation, you can disable them again in
 the [Disabling Statistics](#disabling-statistics) section below.
 
-### Enabling Statistics
+## Enabling Statistics
 
 1. Open your `postgresql.conf` file, search for the `shared_preload_libraries` setting, then add
    `pg_buffercache,pg_stat_statements` to its value (making sure to comma-separate each entry).
@@ -33,7 +36,7 @@ the [Disabling Statistics](#disabling-statistics) section below.
    CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
    ```
 
-### Resetting Statistics
+## Resetting Statistics
 
 To reset the statistics collected by `pg_stat_statements`, you can execute the following command:
 
@@ -61,7 +64,7 @@ NOT LIKE 'template%';
 
 (Note: An empty value here would mean the stats have never been reset, according to PostgreSQL's records)
 
-### Disabling Statistics
+## Disabling Statistics
 
 Once you're done investigating, there's no need to remove the line from `postgresql.conf` - simply
 run the queries below to disable the extensions, so they'll stop running, but be available next
