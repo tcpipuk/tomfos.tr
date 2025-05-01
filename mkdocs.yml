@@ -29,11 +29,63 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - overrides/.icons
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+nav:
+  - Home: index.md
+  - Matrix:
+      - matrix/index.md
+      - Continuwuity:
+          - matrix/continuwuity/index.md
+          - Configuration: matrix/continuwuity/config.md
+          - Docker Deployment: matrix/continuwuity/docker.md
+          - Reverse Proxies:
+              - matrix/continuwuity/reverse-proxies/index.md
+              - SSL: matrix/continuwuity/reverse-proxies/ssl.md
+              - Caddy: matrix/continuwuity/reverse-proxies/caddy.md
+              - Nginx: matrix/continuwuity/reverse-proxies/nginx.md
+      - LiveKit (Element Call):
+          - matrix/livekit/index.md
+          - Caddy Deployment (Official): matrix/livekit/caddy.md
+          - Nginx Deployment (Manual): matrix/livekit/nginx.md
+      - Synapse:
+          - matrix/synapse/index.md
+          - Docker Compose with Templates: matrix/synapse/docker.md
+          - Synapse Configuration: matrix/synapse/synapse.md
+          - PostgreSQL Configuration: matrix/synapse/postgres.md
+          - Nginx Configuration: matrix/synapse/nginx.md
+          - Worker Configuration: matrix/synapse/workers.md
+          - Extra Tips: matrix/synapse/extra-tips.md
+  - PostgreSQL:
+      - postgres/index.md
+      - Replication & Backups:
+          - postgres/backups/index.md
+          - Preparing Docker Compose: postgres/backups/preparing.md
+          - Configuration: postgres/backups/configuration.md
+          - Starting Replication: postgres/backups/replication.md
+          - Backup Script: postgres/backups/backups.md
+          - Conclusion: postgres/backups/conclusion.md
+      - Tuning:
+          - postgres/tuning/index.md
+          - Statistics Modules: postgres/tuning/statistics.md
+          - Worker Configuration: postgres/tuning/workers.md
+          - Memory Configuration: postgres/tuning/memory.md
+          - Query Planner Configuration: postgres/tuning/planner.md
+          - Maintenance: postgres/tuning/maintenance.md
+          - Checkpoints: postgres/tuning/checkpoints.md
+          - Disk Space: postgres/tuning/space.md
+          - Testing Methodology: postgres/tuning/testing.md
+          - Migrating Major Versions: postgres/tuning/versions.md
+          - Conclusion: postgres/tuning/conclusion.md
+  - Community: community.md
+  - Blog:
+      - blog/index.md
 plugins:
   - blog:
       archive_toc: true
@@ -75,7 +127,6 @@ theme:
     - navigation.indexes
     - navigation.instant
     - navigation.instant.prefetch
-    - navigation.instant.preview
     - navigation.instant.progress
     - navigation.path
     - navigation.prune
@@ -92,12 +143,13 @@ theme:
   icon:
     repo: fontawesome/brands/github
   palette:
-    # Default to dark mode
     - media: "(prefers-color-scheme)"
       scheme: slate
       primary: green
       accent: grey
-    # Dark mode
+      toggle:
+        icon: material/auto-mode
+        name: Auto light/dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: green
@@ -105,7 +157,6 @@ theme:
       toggle:
         icon: material/lightbulb
         name: Switch to light mode
-    # Light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: green

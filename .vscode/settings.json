@@ -1,3 +1,39 @@
 {
-  "markdownlint.config": { "MD025": false, "MD033": false }
+  "markdown.extension.toc.levels": "2..6",
+  "markdown.extension.toc.orderedList": true,
+  "markdownlint.config": {
+    "MD004": {
+      "style": "dash"
+    },
+    "MD010": {
+      "spaces_per_tab": 3
+    },
+    "MD013": {
+      "code_blocks": false,
+      "headings": false,
+      "line_length": 100,
+      "strict": false,
+      "tables": false
+    },
+    "MD025": false,
+    "MD029": {
+      "style": "ordered"
+    },
+    "MD033": {
+      "allowed_elements": ["br"]
+    },
+    "no-hard-tabs": true
+  },
+  "yaml.customTags": [
+    "!ENV scalar",
+    "!ENV sequence",
+    "!relative scalar",
+    "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg",
+    "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
+    "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format",
+    "tag:yaml.org,2002:python/object/apply:pymdownx.slugs.slugify mapping"
+  ],
+  "yaml.schemas": {
+    "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
+  }
 }

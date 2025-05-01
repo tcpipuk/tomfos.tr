@@ -1,6 +1,4 @@
 {% extends "main.html" %}
-{% block site_nav %}
-{% endblock site_nav %}
 {% block hero %}
   <div class="mdx-parallax" data-mdx-component="parallax">
     <section class="mdx-parallax__group" data-md-color-scheme="slate">
@@ -53,10 +51,6 @@
 {% block styles %}
   {{ super() }}
   <style>
-    .md-main {
-      display: none;
-    }
-
     .mdx-parallax {
       height: 90vh;
       overflow-y: auto;
@@ -101,8 +95,13 @@
         height: auto;
     }
 
-    /* Tweak positioning for narrow windows */
-    @media screen and (max-width: 1028px) {
+    /* Hide sidebar nav on desktop */
+    @media screen and (min-width: 76.1875em) {
+      .md-sidebar--primary {display: none;}
+    }
+
+    /* Tweak positioning for narrow windows (tablets, etc) */
+    @media screen and (max-width: 64.25em) {
       .backdrop-layer {--md-image-position: 42% !important;}
       .tree-layer {--md-image-position: 30% !important;}
       .tree-layer .mdx-parallax__image { width: 45vh !important; }
@@ -112,7 +111,7 @@
     }
 
     /* Positioning for mobile devices */
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 30em) {
       .backdrop-layer {--md-image-position: 45% !important;}
       .tree-layer {--md-image-position: 35% !important;}
       .tree-layer .mdx-parallax__image { width: 45vh !important; }
@@ -196,7 +195,7 @@
       height: auto;
       background-color: var(--md-default-bg-color);
       position: relative;
-      z-index: 10;
+      z-index: 4;
       transform: translateZ(0);
     }
 
@@ -210,7 +209,6 @@
     .md-header {
       position: sticky;
       top: 0;
-      z-index: 11;
     }
 
      body[data-md-template="home"] .md-main__inner {
