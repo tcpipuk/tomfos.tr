@@ -1,6 +1,9 @@
-# Tuning PostgreSQL for a Matrix Synapse Homeserver
+---
+title: Migrating PostgreSQL Major Versions
+description: Upgrading PostgreSQL? Smoothly migrate your database to the latest major version with our step-by-step guide, including Docker tips and rollback safety. Essential for any application, including Matrix Synapse.
+---
 
-## 9. Migrating Major Versions
+# 9. Migrating Major Versions
 
 1. [Preparing for Migration](#preparing-for-migration)
    1. [Creating a Backup with pg\_dumpall](#creating-a-backup-with-pg_dumpall)
@@ -20,7 +23,7 @@ your entire database will need to be migrated from one version to the other to b
 The guide below is written with a Docker user in mind, but if you're using PostgreSQL directly (or
 in a VM) you can simply ignore the Docker steps.
 
-### Preparing for Migration
+## Preparing for Migration
 
 Backups are always recommended, however this process is designed to allow you to revert in minutes
 without any loss of data. That said, any work you do on your database is at your own risk and it's
@@ -29,7 +32,7 @@ best to ensure you always have multiple copies of all data readily to hand at al
 Depending on the speed of your storage, this process can take up to an hour, so you may wish to
 inform your users about the scheduled downtime.
 
-#### Creating a Backup with pg_dumpall
+### Creating a Backup with pg_dumpall
 
 The most reliable method to migrate the data is to simply export a copy from the old database and
 import it into the new one.
@@ -61,7 +64,7 @@ and passwords, so the new one will identically replicate the old one.
 Now you have your entire database in a single `.sql` file, you can stop PostgreSQL and prepare the
 new version.
 
-### Setting Up the New PostgreSQL Version
+## Setting Up the New PostgreSQL Version
 
 If you're using Docker Compose, you can simply update your `docker-compose.yml` to use the newer
 image (e.g. `postgres:16-alpine`) and change the volume mapping to store the data in a new
@@ -94,7 +97,7 @@ if this interferes with the import, you may need to change the username (e.g. fr
 `synapsetemp`) then after the import is complete and you're back in Synapse, you can remove this
 extra user with `DROP USER synapsetemp;`.
 
-### Restoring Data Manually
+## Restoring Data Manually
 
 If you're not using Docker, or want to load in the data manually, you can simply follow these extra
 instructions:
@@ -118,7 +121,7 @@ instructions:
    rm /var/lib/postgresql/data/pg_backup.sql
    ```
 
-### Completing the Migration
+## Completing the Migration
 
 PostgreSQL did not include your configuration in the backup, so once the restore is complete, stop
 PostgreSQL and copy over your `postgresql.conf` file. When you start it again, it's possible some of
@@ -133,7 +136,7 @@ leave them there, as the `docker-entrypoint-initdb.d` is only read when the Dock
 no databases available, but removing these extra files will save disk space and keep things tidy
 ready for the next time.
 
-### Reverting Back
+## Reverting Back
 
 If your new version of PostgreSQL doesn't start up correctly, or Synapse can't connect to it, you're
 not stuck!

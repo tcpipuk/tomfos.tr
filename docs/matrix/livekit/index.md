@@ -1,3 +1,8 @@
+---
+title: Deploying LiveKit for Matrix Calls
+description: Power up your Matrix chats with video! Learn how to deploy a self-hosted LiveKit server for smooth, reliable Element Call integration. Your calls, your server!
+---
+
 # Deploying LiveKit for Matrix Video Conferencing
 
 So, you're looking to add real-time audio and video to your Matrix setup? [LiveKit](https://livekit.io/)

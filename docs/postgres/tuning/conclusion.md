@@ -1,6 +1,9 @@
-# Tuning PostgreSQL for a Matrix Synapse Homeserver
+---
+title: PostgreSQL Tuning Conclusion
+description: Wrapping up the PostgreSQL tuning journey. Remember, tuning is a continuous process, not a destination. Keep refining for optimal performance!
+---
 
-## 10. Conclusion
+# 10. Conclusion
 
 Throughout this guide, we've touched on key areas such as network configuration, worker alignment,
 memory management, regular maintenance, replication strategies, and systematic testing, but

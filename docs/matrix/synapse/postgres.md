@@ -1,6 +1,9 @@
-# Deploying a Synapse Homeserver with Docker
+---
+title: Setting Up PostgreSQL for Synapse
+description: Get your PostgreSQL database purring for Matrix Synapse. Learn the essential configurations for optimal performance, whether using TCP or Unix sockets.
+---
 
-## 3. PostgreSQL Configuration
+# 3. PostgreSQL Configuration
 
 1. [Creating Database](#creating-database)
 2. [Configuring PostgreSQL](#configuring-postgresql)
@@ -8,7 +11,7 @@
    1. [Unix Sockets](#unix-sockets)
    2. [TCP Ports](#tcp-ports)
 
-### Creating Database
+## Creating Database
 
 Before we can modify the PostgreSQL config, we need to let the container generate it, so for now
 (whether you're deploying a single database or a replica too) just start the primary database like this:
@@ -31,7 +34,7 @@ PostgreSQL init process complete; ready for start up.
 2023-12-20 22:58:57.707 UTC [1] LOG:  database system is ready to accept connections
 ```
 
-### Configuring PostgreSQL
+## Configuring PostgreSQL
 
 Now you can hit Ctrl+C to close it, and you should find a "psql16" folder now exists with a
 `postgresql.conf` file inside it.
@@ -132,13 +135,13 @@ wal_buffers = 32MB
 work_mem = 28MB
 ```
 
-### Networking
+## Networking
 
 Choosing the optimal communication method between Synapse and PostgreSQL is essential for
 performance. There are two primary avenues to consider, Unix sockets and TCP ports, which I'll
 cover below:
 
-#### Unix Sockets
+### Unix Sockets
 
 Unix sockets provide a high-speed communication channel between processes on the same machine,
 bypassing the network stack and reducing latency. This method is ideal when both Synapse and
@@ -168,12 +171,14 @@ PostgreSQL are hosted on the same system. Here's how to set it up:
    After setting the `host` field to the Unix socket directory, restart Synapse for the changes to
    take effect.
 
-   **Note**: Do **not** include the socket filename as Postgres auto-generates the name based on
-   the port number. This also means that, if you've changed the default port number in either
-   Synapse or PostgreSQL, you must ensure these fields remain after switching to sockets, so both
-   applications generate and look for the correct socket name.
+   !!! warning
 
-#### TCP Ports
+       Do **not** include the socket filename as Postgres auto-generates the name based on the port
+       number. This also means that, if you've changed the default port number in either Synapse or
+       PostgreSQL, you must ensure these fields remain after switching to sockets, so both
+       applications generate and look for the correct socket name.
+
+### TCP Ports
 
 When Synapse and PostgreSQL are on different hosts or when Unix sockets are not an option, TCP
 ports are used for communication. This method is more versatile and allows for distributed setups.

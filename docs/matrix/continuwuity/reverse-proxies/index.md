@@ -1,3 +1,8 @@
+---
+title: Reverse Proxies for Continuwuity
+description: Open the gates! Choose and configure the right reverse proxy (Caddy or Nginx) to securely connect your Continuwuity Matrix server to the world.
+---
+
 # Configuring Reverse Proxies for Continuwuity
 
 A reverse proxy is essential for running Continuwuity in production, handling TLS termination and

@@ -1,4 +1,7 @@
-# PostgreSQL for Synapse Homeservers
+---
+title: PostgreSQL for Synapse Homeservers
+description: Master the database behind your Matrix Synapse server. Explore guides on setting up, configuring, and optimising PostgreSQL for peak performance and reliability.
+---
 
 Welcome to my PostgreSQL guides! If you're here, you're likely interested in optimising and
 understanding how PostgreSQL works with your Matrix Synapse Homeserver.

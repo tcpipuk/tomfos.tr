@@ -1,13 +1,16 @@
-# Deploying a Synapse Homeserver with Docker
+---
+title: Configuring Your Synapse Homeserver
+description: Get your Matrix Synapse homeserver purring with the right settings. Dive into the `homeserver.yaml` essentials for stability, performance, and security.
+---
 
-## 2. Synapse Configuration
+# 2. Synapse Configuration
 
 1. [Default File](#default-file)
 2. [Log Config](#log-config)
 3. [Homeserver Config](#homeserver-config)
 4. [Cache Optimisation](#cache-optimisation)
 
-### Default File
+## Default File
 
 Before we can modify the Synapse config, we need to create it.
 
@@ -31,7 +34,7 @@ The signing key is unique to your server and is vital to maintain for other serv
 in the future. You can wipe the entire database and still be able to federate with other servers if
 your signing key is the same, so it's worthwhile backing this up now.
 
-### Log Config
+## Log Config
 
 For the log config, by default this is very barebones and just logs straight to console, but you
 could replace it with something like this to keep a daily log for the past 3 days in your `logs`
@@ -75,15 +78,17 @@ root:
     handlers: [buffer]
 ```
 
-### Homeserver Config
+## Homeserver Config
 
 By default, this file is quite short and relies a lot on defaults. There is no harm adding blank
 lines between entries here to make it more readable, or adding comments (starting with the `#` hash
 character) to explain what lines mean.
 
-**Note: The "secret" or "key" lines are unique to your server and things are likely to misbehave if
-you change some of them after the server is running.** It's generally best to leave them safe at the
-bottom of the file while you work on the other values.
+!!! warning
+
+    The "secret" or "key" lines are unique to your server and things are likely to misbehave if you
+    change some of them after the server is running. It's generally best to leave them safe at the
+    bottom of the file while you work on the other values.
 
 Here's an example with comments you may wish to use to start with some safe defaults:
 
@@ -280,7 +285,7 @@ in case you want to use SSO instead of Synapse's built-in password database - it
 omit this `oidc_providers:` section if you're not using SSO, but [the official Authentik guide](https://goauthentik.io/integrations/services/matrix-synapse/)
 is quite quick and easy if you do wish to use it [after installing Authentik](https://goauthentik.io/docs/installation/docker-compose).
 
-### Cache Optimisation
+## Cache Optimisation
 
 Most of the example configuration above is fairly standard, however of particular note to
 performance tuning is the cache configuration.

@@ -1,3 +1,8 @@
+---
+title: LiveKit with Nginx Reverse Proxy
+description: Go manual! Deploy LiveKit using Docker Compose and configure Nginx as your reverse proxy for ultimate control over your Matrix video calls.
+---
+
 # Deploying LiveKit with Nginx (Manual Docker Setup)
 
 This guide is for setting up LiveKit with Docker Compose yourself, specifically for integrating with

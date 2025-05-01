@@ -1,6 +1,9 @@
-# Tuning PostgreSQL for a Matrix Synapse Homeserver
+---
+title: Managing PostgreSQL Disk Space
+description: Running low on disk? Learn to track and manage PostgreSQL database storage, identify large tables, and discover tools to reclaim space, using Matrix Synapse media storage as an example.
+---
 
-## 7. Disk Space
+# 7. Disk Space
 
 1. [Database Size](#database-size)
    1. [Synapse Compress State Utility](#synapse-compress-state-utility)
@@ -10,7 +13,7 @@ Efficient disk space management ensures that your server remains responsive and 
 the most of your available resources. This is difficult to cover in detail, as the applications and
 usage of a Matrix server vary wildly, but I've included some general guidance below:
 
-### Database Size
+## Database Size
 
 Over time, your PostgreSQL database will grow as more data is added. It's important to keep an eye
 on the size of your tables, especially those that are known to grow rapidly, such as
@@ -72,13 +75,13 @@ LIMIT 10;
 ...
 ```
 
-#### Synapse Compress State Utility
+### Synapse Compress State Utility
 
 For Synapse, the `state_groups_state` table can grow significantly. To help manage this, The Matrix
 Foundation has developed a tool called [Synapse Compress State](https://github.com/matrix-org/rust-synapse-compress-state)
 that can compress state maps without losing any data.
 
-### Media Size
+## Media Size
 
 Media files, such as images and videos and other message attachments, are stored on the filesystem
 rather than the database, but are tracked in PostgreSQL. Large media files can consume significant
@@ -116,5 +119,7 @@ LIMIT 10;
  ...
 ```
 
-**Note:** For tips on how to have Synapse automatically reduce the size of your media files, see
-[Extra Tips](../../synapse/extra-tips.md) in the [Synapse Deployment Guide](../../synapse/README.md).
+!!! note
+
+    For tips on how to have Synapse automatically reduce the size of your media files, see
+    [Extra Tips](../../synapse/extra-tips.md) in the [Synapse Deployment Guide](../../synapse/README.md).

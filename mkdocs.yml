@@ -123,7 +123,7 @@ plugins:
 theme:
   name: material
   custom_dir: docs/overrides
-  language: en
+  favicon: assets/images/favicon.png
   features:
     - content.action.view
     - content.code.annotate
@@ -147,7 +147,10 @@ theme:
     text: Roboto
     code: Roboto Mono
   icon:
+    logo: assets/images/icon.svg
     repo: fontawesome/brands/github
+  language: en
+  logo: assets/images/icon.svg
   palette:
     - media: "(prefers-color-scheme)"
       scheme: slate

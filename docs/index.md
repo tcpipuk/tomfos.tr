@@ -1,5 +1,6 @@
 ---
 title: Home
+description: Tom Foster's personal site featuring notes, guides, and musings on Python, Linux, Matrix, open source, and emerging technology.
 template: home.html
 hide:
   - nav
@@ -48,14 +49,21 @@ hide:
 
 </div>
 
-I build things that work and document things that don't. When I'm not diving into code or tinkering
-with Linux systems, you'll find me contributing to open source communities or experimenting with the
-latest tech.
-
-My Matrix ID is [`@+:tomfos.tr`](https://matrix.to/#/@+:tomfos.tr). If you're interested in
-connecting, join my [Matrix space](https://matrix.to/#/#space:tomfos.tr) where I moderate several
-technical communities.
-
-This site houses my notes, guides, and occasional musings on technology, open source projects, and
-the intersection of science fiction and emerging tech. Everything here is battle-tested and
-bullshit-free.
+<div style="text-align: center; margin: 2rem 0;" markdown>
+  <p style="font-size: 1.1rem; max-width: 40rem; margin-left: auto; margin-right: auto;">
+    I build things that work and document things that don't. This site houses my notes, guides, and
+    occasional musings on technology, open source projects, and the intersection of science fiction
+    and emerging tech. Everything here is battle-tested and bullshit-free.
+  </p>
+  <p style="margin-top: 1.5rem;">
+    Find me on Matrix:
+  </p>
+  <p style="margin-top: .5rem;" markdown>
+    <a href="https://matrix.to/#/@+:tomfos.tr" class="md-button md-button--primary">
+      :fontawesome-solid-dove: @+:tomfos.tr
+    </a>
+    <a href="https://matrix.to/#/#space:tomfos.tr" class="md-button md-button--primary">
+      :fontawesome-solid-people-group: #space:tomfos.tr
+    </a>
+  </p>
+</div>

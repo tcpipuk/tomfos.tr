@@ -1,6 +1,9 @@
-# Deploying a Synapse Homeserver with Docker
+---
+title: Configuring Nginx as a Reverse Proxy for Synapse
+description: Optimise your Matrix Synapse deployment with Nginx. This guide covers configuring Nginx as a reverse proxy, balancing load across workers, and handling HTTP/HTTPS.
+---
 
-## 4. Nginx Configuration
+# 4. Nginx Configuration
 
 1. [Docker Compose](#docker-compose)
 2. [Configuration Files](#configuration-files)
@@ -11,7 +14,7 @@
    5. [proxy.conf](#proxyconf)
    6. [private.conf](#privateconf)
 
-### Docker Compose
+## Docker Compose
 
 Example Docker Compose deployment:
 
@@ -40,7 +43,7 @@ Having Nginx here will provide a single HTTP port to your network to access Syna
 your machine it'll behave (almost) exactly the same as a monolithic instance of Synapse, just a lot
 faster!
 
-### Configuration Files
+## Configuration Files
 
 I recommend splitting up the config into more manageable files, so next to my `docker-compose.yml`
 I have an `nginx` directory with the following file structure:
@@ -59,7 +62,7 @@ nginx
 
 My current configuration files are below, with a short summary of what's going on:
 
-#### nginx.conf
+### nginx.conf
 
 This is some fairly standard Nginx configuration for a public HTTP service, with one Nginx worker
 per CPU core, and larger buffer sizes to accommodate media requests:
@@ -200,7 +203,7 @@ http {
 }
 ```
 
-#### upstreams.conf
+### upstreams.conf
 
 This is where we actually list the sockets Nginx will send requests to:
 
@@ -261,7 +264,7 @@ I've included the load balancing method you should use for each one, in case you
 workers - for example, if your server needs to generate lots of thumbnails, or has more than a few
 users, you may need an extra media worker.
 
-#### maps.conf
+### maps.conf
 
 These are used to provide "mapping" so Nginx can understand which worker to load balance incoming
 requests, no changes should be required:
@@ -287,7 +290,7 @@ map $request_uri $room_name {
 }
 ```
 
-#### locations.conf
+### locations.conf
 
 This is the biggest file, and defines which URIs go to which upstream:
 
@@ -433,7 +436,7 @@ out to a separate worker for stream writing, but for a small number of clients (
 install) it's best for performance to keep the caches with your sync workers to maximise caching
 and minimise queries to your database.
 
-#### proxy.conf
+### proxy.conf
 
 You may have noticed we used "proxy.conf" many times above. We do this to quickly define standard
 proxy config, which could easily be overriden per location block if needed later:
@@ -454,7 +457,7 @@ proxy_set_header Connection $connection_upgrade;
 proxy_set_header Upgrade $http_upgrade;
 ```
 
-#### private.conf
+### private.conf
 
 Lastly, let's approve specific ranges for private access to the admin API. You'll want to define
 ranges that can access it, which may include your home/work IP, or private ranges if you're hosting

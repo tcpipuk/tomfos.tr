@@ -1,3 +1,8 @@
+---
+title: Nginx Reverse Proxy for Continuwuity
+description: Tame the traffic! Configure Nginx as a high-performance reverse proxy for your Continuwuity Matrix server. Optimised for speed and reliability.
+---
+
 # Configuring Nginx for Continuwuity
 
 This guide covers setting up Nginx as a reverse proxy for Continuwuity, with optimisations for

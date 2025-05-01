@@ -1,3 +1,8 @@
+---
+title: Continuwuity: Reliable Matrix Homeserver
+description: Building a rock-solid Matrix homeserver? Dive into Continuwuity for a setup designed for resilience and peace of mind.
+---
+
 # Matrix Continuwuity Homeserver Guides
 
 This section provides comprehensive guides for deploying Continuwuity, a featureful fork of the Conduit

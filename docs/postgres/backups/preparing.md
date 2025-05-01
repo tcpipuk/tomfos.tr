@@ -1,6 +1,9 @@
-# Setting Up a Replica for Backups for PostgreSQL in Docker
+---
+title: Preparing for PostgreSQL Backups
+description: Before you back up, prepare! Learn the crucial steps and checks needed to ensure your PostgreSQL backups are reliable and restorable when you need them most.
+---
 
-## 1. Preparing Docker Compose
+# 1. Preparing Docker Compose
 
 Below is an example of my database entry in `docker-compose.yml`:
 

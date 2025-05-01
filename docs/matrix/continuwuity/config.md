@@ -1,3 +1,8 @@
+---
+title: Configuring Continuwuity
+description: Tweak your Continuwuity Matrix homeserver to perfection. Master the configuration settings for optimal performance and reliability.
+---
+
 # Configuring Continuwuity
 
 This guide covers the essential Continuwuity configuration options for Docker deployments. For a

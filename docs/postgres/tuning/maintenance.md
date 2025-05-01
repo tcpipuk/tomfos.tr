@@ -1,6 +1,9 @@
-# Tuning PostgreSQL for a Matrix Synapse Homeserver
+---
+title: PostgreSQL Maintenance and Autovacuum
+description: Keep your PostgreSQL database tidy! Learn about VACUUM and how to tune autovacuum settings for efficient, automated maintenance, essential for busy databases like Matrix Synapse.
+---
 
-## 5. Maintenance
+# 5. Maintenance
 
 1. [Vacuuming](#vacuuming)
 2. [Autovacuum](#autovacuum)
@@ -8,13 +11,13 @@
 Regular maintenance of your PostgreSQL database is important and, when configured correctly,
 PostgreSQL can take care of most of these duties itself.
 
-### Vacuuming
+## Vacuuming
 
 When PostgreSQL deletes data, it doesn't immediately remove it from disk, but rather marks it for
 removal later. This cleanup task is called "vacuuming", where the old data is removed and the
 database compacted to improve efficiency and leave less to search in future operations.
 
-### Autovacuum
+## Autovacuum
 
 Autovacuum is PostgreSQL's automated janitor, regularly tidying up to save you doing it manually
 later. It's a helpful feature that can save you time and effort, but as with most PostgreSQL

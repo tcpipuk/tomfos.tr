@@ -1,6 +1,9 @@
-# Tuning PostgreSQL for a Matrix Synapse Homeserver
+---
+title: Configuring the PostgreSQL Query Planner
+description: Teach PostgreSQL's query planner new tricks! Fine-tune cost parameters and parallelism settings to optimise query execution for demanding databases like Matrix Synapse.
+---
 
-## 4. Query Planner Configuration
+# 4. Query Planner Configuration
 
 1. [Cost-Based Parameters](#cost-based-parameters)
 2. [Partitioning Parameters](#partitioning-parameters)
@@ -13,7 +16,7 @@ The planner weighs various factors (such as data size, indexes, and available sy
 blend performance and accuracy, and we have the opportunity to tune this behaviour, so I've listed
 a few common options below that could help optimise queries.
 
-### Cost-Based Parameters
+## Cost-Based Parameters
 
 These parameters help PostgreSQL's query planner estimate the relative cost of different query
 execution plans:
@@ -77,7 +80,7 @@ min_parallel_table_scan_size = 8MB
   focusing parallel resources on larger scans. Decreasing it (e.g. to 4MB) might encourage more
   parallelism, even for smaller tables.
 
-### Partitioning Parameters
+## Partitioning Parameters
 
 At the time of writing, Synapse doesn't use partitioning in tables, so these should have no effect.
 However, as they have no negative impact on performance, it's worth enabling them in case

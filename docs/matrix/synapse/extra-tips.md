@@ -1,10 +1,13 @@
-# Deploying a Synapse Homeserver with Docker
+---
+title: Extra Synapse Tips & Tricks
+description: Fine-tune your Matrix Synapse server! Learn handy tips like managing media retention and optimising storage for a smoother homeserver experience.
+---
 
-## 6. Extra Tips
+# 6. Extra Tips
 
 1. [Managing Media Files](#managing-media-files)
 
-### Managing Media Files
+## Managing Media Files
 
 Synapse provides [configuration options](https://matrix-org.github.io/synapse/latest/usage/configuration/config_documentation.html#media_retention)
 to manage media files, such as:
