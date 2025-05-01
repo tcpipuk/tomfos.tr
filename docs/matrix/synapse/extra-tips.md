@@ -16,7 +16,7 @@ to manage media files, such as:
 
 Here's an example of how you might configure these in your `homeserver.yaml`:
 
-```yaml,filepath=homeserver.yaml
+```yaml title="homeserver.yaml"
 media_store_path: "/var/lib/synapse/media"
 max_upload_size: "10M"
 media_retention:

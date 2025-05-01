@@ -15,7 +15,7 @@
 
 Example Docker Compose deployment:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
   nginx:
     <<: *small-container
     depends_on:
@@ -64,7 +64,7 @@ My current configuration files are below, with a short summary of what's going o
 This is some fairly standard Nginx configuration for a public HTTP service, with one Nginx worker
 per CPU core, and larger buffer sizes to accommodate media requests:
 
-```nginx,filepath=nginx.conf
+```nginx title="nginx.conf"
 # Worker Performance
 worker_processes auto;
 worker_rlimit_nofile 8192;
@@ -145,7 +145,7 @@ This specifically just covers HTTP for placing behind another HTTPS proxy if you
 
 If you want this server to handle HTTPS directly in front of the internet, add this:
 
-```nginx,filepath=nginx.conf
+```nginx title="nginx.conf"
 http {
   # SSL hardening
   ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
@@ -178,7 +178,7 @@ http {
 
     # SSL certificate
     ssl_certificate /path/to/ssl/mydomain.com/fullchain.pem;
-    ssl_certificate_key /path/to/ssl/mydomain.com/privkey.pem;    
+    ssl_certificate_key /path/to/ssl/mydomain.com/privkey.pem;
 
     # Default security headers
     add_header Referrer-Policy "no-referrer";
@@ -204,7 +204,7 @@ http {
 
 This is where we actually list the sockets Nginx will send requests to:
 
-```nginx,filepath=upstreams.conf
+```nginx title="upstreams.conf"
 # Client non-room requests
 upstream synapse_inbound_client_readers {
   # least_conn;
@@ -266,7 +266,7 @@ users, you may need an extra media worker.
 These are used to provide "mapping" so Nginx can understand which worker to load balance incoming
 requests, no changes should be required:
 
-```nginx,filepath=maps.conf
+```nginx title="maps.conf"
 # Client username from MXID
 map $http_authorization $mxid_localpart {
   default                           $http_authorization;
@@ -291,7 +291,7 @@ map $request_uri $room_name {
 
 This is the biggest file, and defines which URIs go to which upstream:
 
-```nginx,filepath=locations.conf
+```nginx title="locations.conf"
 ### MAIN OVERRIDES ###
 
 # Client: Main overrides
@@ -438,7 +438,7 @@ and minimise queries to your database.
 You may have noticed we used "proxy.conf" many times above. We do this to quickly define standard
 proxy config, which could easily be overriden per location block if needed later:
 
-```nginx,filepath=proxy.conf
+```nginx title="proxy.conf"
 proxy_connect_timeout 2s;
 proxy_buffering off;
 proxy_http_version 1.1;
@@ -463,7 +463,7 @@ at home.
 Here, I've specified the standard [RFC1918](https://en.wikipedia.org/wiki/Private_network) private
 ranges:
 
-```nginx,filepath=private.conf
+```nginx title="private.conf"
 # Access list for non-public access
 allow 10.0.0.0/8;
 allow 172.16.0.0/12;

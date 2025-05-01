@@ -4,7 +4,7 @@
 
 Below is an example of my database entry in `docker-compose.yml`:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
 volumes:
   sockets:
 
@@ -31,7 +31,7 @@ same host.
 To do the same, just ensure you have this in your `postgresql.conf` to let Postgres know where to
 write its sockets:
 
-```ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+```ini title="postgresql.conf"
 unix_socket_directories = '/sockets'
 ```
 
@@ -41,7 +41,7 @@ some of the later steps to replicate via TCP port instead.
 I've then added this replica, almost identical except for the standby configuration with lower
 resource limits:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
   db-replica:
     cpus: 2
     depends_on:

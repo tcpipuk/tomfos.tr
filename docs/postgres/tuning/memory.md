@@ -2,11 +2,12 @@
 
 ## 3. Memory Configuration
 
-1. [Shared Buffers](#shared-buffers)
-2. [Shared Memory](#shared-memory)
-3. [Effective Cache Size](#effective-cache-size)
-4. [Working Memory](#working-memory)
-5. [Maintenance Work Memory](#maintenance-work-memory)
+1. [3. Memory Configuration](#3-memory-configuration)
+   1. [Shared Buffers](#shared-buffers)
+   2. [Shared Memory](#shared-memory)
+   3. [Effective Cache Size](#effective-cache-size)
+   4. [Working Memory](#working-memory)
+   5. [Maintenance Work Memory](#maintenance-work-memory)
 
 Memory plays a pivotal role in the performance of your PostgreSQL database, as does using it
 efficiently in the right places. Having terrabytes of RAM would undoubtedly speed things up, but
@@ -18,7 +19,7 @@ The `shared_buffers` setting determines the amount of memory allocated for Postg
 caching data. This cache is critical because it allows frequently accessed data to be served
 directly from memory, which is much faster than reading from disk.
 
-```conf,lang=ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+```ini title="postgresql.conf"
 # Set the amount of memory the database server uses for shared memory buffers
 shared_buffers = '4GB'
 ```
@@ -31,7 +32,7 @@ database.
 
 You can run this query to see the status of your buffers:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 WITH block_size AS (
     SELECT setting::integer AS block_size
     FROM pg_settings
@@ -77,7 +78,7 @@ reducing disk I/O.
 
 Here's an example of how you might set this in your Docker configuration:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
 services:
   postgres:
     image: postgres:latest
@@ -93,7 +94,7 @@ while PostgreSQL is using the space, so it's worth setting this to a similar siz
 The `effective_cache_size` parameter helps the PostgreSQL query planner to estimate how much memory
 is available for disk caching by the operating system and PostgreSQL combined:
 
-```conf,lang=ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+```ini title="postgresql.conf"
 # Set the planner's assumption about the effective size of the disk cache
 effective_cache_size = '8GB'
 ```
@@ -104,7 +105,7 @@ caching and can influence decisions such as whether to use an index scan or a se
 
 For example, using the `free` command, you might see:
 
-```bash,icon=.devicon-bash-plain,filepath=top
+```bash title="top"
 # free -h
                total        used        free      shared  buff/cache   available
 Mem:            62Gi        23Gi       3.4Gi       5.5Gi        35Gi        32Gi
@@ -113,7 +114,7 @@ Swap:          8.0Gi       265Mi       7.7Gi
 
 Or using the `top` command, you might see:
 
-```bash,icon=.devicon-bash-plain,filepath=top
+```bash title="top"
 # top -n1 | head -n5
 top - 15:20:35 up 14:26,  1 user,  load average: 0.67, 1.92, 2.58
 Threads: 5240 total,   1 running, 5239 sleeping,   0 stopped,   0 zombie
@@ -132,7 +133,7 @@ memory instead.
 The `work_mem` setting controls the amount of memory used for internal sort operations and hash
 tables instead of writing to temporary disk files:
 
-```conf,lang=ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+```ini title="postgresql.conf"
 # Set the maximum amount of memory to be used for query workspaces
 work_mem = '32MB'
 ```
@@ -146,7 +147,7 @@ total potential memory usage under peak load when choosing a value.
 You can use this query to see how many (and how often) the temporary files are written to disk
 because the `work_mem` wasn't high enough:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 SELECT datname,
        temp_files,
        temp_bytes

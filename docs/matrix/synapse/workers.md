@@ -34,7 +34,7 @@ so will want to add these now.
 To begin with, let's tell Synapse the name of workers we want to assign to various roles that can be
 split out of the main Synapse process:
 
-```yaml,filepath=homeserver.yaml
+```yaml title="homeserver.yaml"
 enable_media_repo: false
 federation_sender_instances:
   - sender1
@@ -70,7 +70,7 @@ thousands of users, should the need arise.
 Now we've defined the roles, we also need to add an `instance_map` to tell Synapse how to reach each
 worker listed in the config entries above:
 
-```yaml,filepath=homeserver.yaml
+```yaml title="homeserver.yaml"
 instance_map:
   main:
     path: "/sockets/synapse_replication_main.sock"
@@ -97,7 +97,7 @@ they're easier to organise.
 
 These are typically very simple, but vary slightly depending on the worker, so I'll explain that below.
 
-```yaml,filepath=workers/client_sync1.yaml
+```yaml title="workers/client_sync1.yaml"
 worker_app: "synapse.app.generic_worker" # Always this unless "synapse.app.media_repository"
 worker_name: "client_sync1" # Name of worker specified in instance map
 worker_log_config: "/data/log.config/client_sync.log.config" # Log config file
@@ -125,7 +125,7 @@ worker_listeners:
 This means, for example, that the Room Workers don't need a replication socket as they are not in
 the instance map, but do require an inbound socket as Nginx will need to forward events to them:
 
-```yaml,filepath=workers/rooms1.yaml
+```yaml title="workers/rooms1.yaml"
 worker_app: "synapse.app.generic_worker"
 worker_name: "rooms1"
 worker_log_config: "/data/log.config/rooms.log.config"
@@ -150,7 +150,7 @@ These have a [standard format](https://docs.python.org/3/library/logging.config.
 have enabled buffered logging to lower disk I/O, and use a daily log to keep for 3 days before
 deleting:
 
-```yaml,filepath=log.config/rooms.yaml
+```yaml title="log.config/rooms.yaml"
 version: 1
 formatters:
   precise:
@@ -204,7 +204,7 @@ Since we defined a "synapse-worker-template" and "synapse-media-template" in the
 [Docker Compose section](./docker.md#yaml-templating), these are very simple to define just below
 our main Synapse container:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
   synapse:
     <<: *synapse-template
 

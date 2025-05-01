@@ -18,10 +18,10 @@ on the size of your tables, especially those that are known to grow rapidly, suc
 
 This query will list your largest tables:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 WITH table_sizes AS (
     SELECT table_schema,
-           table_name, 
+           table_name,
            pg_total_relation_size('"' || table_schema || '"."' || table_name || '"') AS size
     FROM information_schema.tables
     WHERE table_schema NOT IN ('pg_catalog', 'information_schema')
@@ -43,7 +43,7 @@ LIMIT 10;
 On a Synapse server, you should find `state_groups_state` is by far the largest one, and can see
 which rooms are the largest with a query like this:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 WITH room_counts AS (
     SELECT room_id,
            COUNT(*),
@@ -52,7 +52,7 @@ WITH room_counts AS (
     GROUP BY room_id
 ), table_sizes AS (
     SELECT table_schema,
-           table_name, 
+           table_name,
            pg_total_relation_size('"' || table_schema || '"."' || table_name || '"') AS size
     FROM information_schema.tables
     WHERE table_name = 'state_groups_state'
@@ -88,7 +88,7 @@ directly.
 With this query you can see how many files of each type were uploaded each month, and the total disk
 space that consumes:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 WITH media_size AS (
     SELECT EXTRACT(YEAR FROM to_timestamp(created_ts / 1000)) AS year,
         EXTRACT(MONTH FROM to_timestamp(created_ts / 1000)) AS month,

@@ -37,7 +37,7 @@ For the log config, by default this is very barebones and just logs straight to 
 could replace it with something like this to keep a daily log for the past 3 days in your `logs`
 folder:
 
-```yaml,filepath=mydomain.com.log.config
+```yaml title="mydomain.com.log.config"
 version: 1
 formatters:
   precise:
@@ -87,7 +87,7 @@ bottom of the file while you work on the other values.
 
 Here's an example with comments you may wish to use to start with some safe defaults:
 
-```yaml,filepath=homeserver.yaml
+```yaml title="homeserver.yaml"
 # Basic Server Details
 server_name: "mydomain.com" # Domain name used by other homeservers to connect to you
 public_baseurl: "https://matrix.mydomain.com/" # Public URL of your Synapse server
@@ -288,7 +288,7 @@ performance tuning is the cache configuration.
 The defaults (at time of writing) are below and in the official documentation at [event_cache_size](https://matrix-org.github.io/synapse/latest/usage/configuration/config_documentation.html#event_cache_size)
 and [caches](https://matrix-org.github.io/synapse/latest/usage/configuration/config_documentation.html#caches-and-associated-values):
 
-```yaml,filepath=homeserver.yaml
+```yaml title="homeserver.yaml"
 event_cache_size: 10K
 caches:
   global_factor: 0.5
@@ -317,7 +317,7 @@ I've recommended the following config, which instead:
 - Modified the limit to expand caches that are frequently accessed by large federated rooms, and
   restricted ones that are less frequently reused
 
-```yaml,filepath=homeserver.yaml
+```yaml title="homeserver.yaml"
 event_cache_size: 30K
 caches:
   global_factor: 1
@@ -343,7 +343,7 @@ Furthermore, as this is designed to be a server with more limited RAM, we've upd
 collection" thresholds, so Synapse can quickly clean up older cached entries to make sure we're
 keeping a healthy amount of cache without running out of memory:
 
-```yaml,filepath=homeserver.yaml
+```yaml title="homeserver.yaml"
 gc_thresholds: [550, 10, 10]
 gc_min_interval: [1s, 1m, 2m]
 ```

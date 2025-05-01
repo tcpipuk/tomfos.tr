@@ -13,7 +13,7 @@
 
 You can use this query to see the number of active and idle connections open to each database:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 SELECT datname AS database,
        state AS connection_state,
        count(*) AS connections
@@ -40,7 +40,7 @@ significantly fewer database connections to complete its task.
 
 In Synapse, you can configure the `cp_min` and `cp_max` values for this:
 
-```yaml,filepath=homeserver.yaml
+```yaml title="homeserver.yaml"
 database:
   name: psycopg2
   args:
@@ -71,7 +71,7 @@ many different ways to view the data, but below are a couple of examples to try:
 This will give you the top 5 slowest queries, how many times they've been called, the total
 execution time, and average execution time:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 SELECT LEFT(query, 80) AS short_query,
        calls,
        ROUND(mean_exec_time) AS average_ms,
@@ -85,7 +85,7 @@ LIMIT 5;
 
 If you want to analyse a specific query pattern for slowness, you can filter by the query text:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 SELECT LEFT(query, 80) AS short_query,
        ROUND(mean_exec_time) AS average_ms,
        calls,

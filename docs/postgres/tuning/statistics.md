@@ -22,13 +22,13 @@ the [Disabling Statistics](#disabling-statistics) section below.
 
    If it's not present, simply add the following line:
 
-   ```ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+   ```ini title="postgresql.conf"
    shared_preload_libraries = 'pg_buffercache,pg_stat_statements'
    ```
 
 2. Restart the PostgreSQL server for the changes to take effect, then run these queries:
 
-   ```sql,icon=.devicon-postgresql-plain,filepath=psql
+   ```sql title="psql"
    CREATE EXTENSION IF NOT EXISTS pg_buffercache;
    CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
    ```
@@ -37,7 +37,7 @@ the [Disabling Statistics](#disabling-statistics) section below.
 
 To reset the statistics collected by `pg_stat_statements`, you can execute the following command:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 SELECT pg_stat_reset();
 ```
 
@@ -46,7 +46,7 @@ looking at fresh numbers.
 
 You can check when the stats were last reset for each database using a query like this:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 SELECT datname AS database,
        stats_reset AS stats_last_reset
 FROM pg_stat_database
@@ -67,7 +67,7 @@ Once you're done investigating, there's no need to remove the line from `postgre
 run the queries below to disable the extensions, so they'll stop running, but be available next
 time you need them:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 DROP EXTENSION IF EXISTS pg_buffercache;
 DROP EXTENSION IF EXISTS pg_stat_statements;
 ```

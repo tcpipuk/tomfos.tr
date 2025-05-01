@@ -42,7 +42,7 @@ can lead to resource contention and increased context switching, which can degra
 
 Here's an example of how you might configure the worker settings in `postgresql.conf`:
 
-```ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+```ini title="postgresql.conf"
 # Maximum number of workers in total, including maintenance and replication
 # (typically the number of CPU cores you have)
 max_worker_processes = 8
@@ -83,7 +83,7 @@ free up resources for Synapse and other processes.
 With `pg_stat_statements` enabled, you can now monitor the performance of your SQL statements.
 Here's a query to help you analyse the database's behaviour:
 
-```sql,icon=.devicon-postgresql-plain,filepath=psql
+```sql title="psql"
 SELECT LEFT(query, 80) AS query,
        calls,
        mean_exec_time AS average_time_ms,

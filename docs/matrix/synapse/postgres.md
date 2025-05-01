@@ -38,7 +38,7 @@ Now you can hit Ctrl+C to close it, and you should find a "psql16" folder now ex
 
 I recommend removing it entirely and replacing it with a template of selected values like this:
 
-```ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+```ini title="postgresql.conf"
 # Network
 listen_addresses = '0.0.0.0'
 max_connections = 500
@@ -115,7 +115,7 @@ to decide on the best amount of workers and cache for your situation.
 If in doubt, it's better to be _more_ conservative, and increase values over time as needed - on a
 quad-core server with 8GB RAM, these would be reasonable values to start:
 
-```ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+```ini title="postgresql.conf"
 # Workers
 max_worker_processes = 4
 max_parallel_workers = 4
@@ -146,7 +146,7 @@ PostgreSQL are hosted on the same system. Here's how to set it up:
 
 1. Edit the `postgresql.conf` file to specify the directory for the Unix socket:
 
-   ```ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+   ```ini title="postgresql.conf"
    # Set the directory for the Unix socket
    unix_socket_directories = '/var/run/postgresql'
    ```
@@ -155,7 +155,7 @@ PostgreSQL are hosted on the same system. Here's how to set it up:
 
 2. Configure Synapse to use Unix sockets by editing the `homeserver.yaml` file:
 
-   ```yaml,filepath=homeserver.yaml
+   ```yaml title="homeserver.yaml"
    database:
    name: psycopg2
    args:
@@ -182,7 +182,7 @@ Here's how to configure TCP communication:
 1. PostgreSQL listens on TCP port 5432 by default, but you can verify or change this in the
    `postgresql.conf` file:
 
-   ```ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+   ```ini title="postgresql.conf"
    # Listen for TCP connections on the following addresses and ports
    listen_addresses = '*'
    port = 5432
@@ -193,7 +193,7 @@ Here's how to configure TCP communication:
 
 2. Point Synapse to the correct TCP port and address in the `homeserver.yaml` file:
 
-   ```yaml,filepath=homeserver.yaml
+   ```yaml title="homeserver.yaml"
    database:
    name: psycopg2
    args:

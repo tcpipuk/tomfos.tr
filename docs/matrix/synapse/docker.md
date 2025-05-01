@@ -1,29 +1,23 @@
-# Deploying a Synapse Homeserver with Docker
+---
+title: "Deploying Synapse with Docker: Docker Compose with Templates"
+---
 
-## 1. Docker Compose with Templates
+# 1. Docker Compose with Templates
 
-1. [Docker Engine](#docker-engine)
-2. [Environment Files](#environment-files)
-3. [YAML Templating](#yaml-templating)
-4. [Unix Sockets](#unix-sockets)
-5. [Redis](#redis)
-6. [PostgreSQL Database](#postgresql-database)
-7. [Synapse](#synapse)
-
-### Docker Engine
+## Docker Engine
 
 If Docker is not already installed, visit [the official guide](https://docs.docker.com/engine/install/#supported-platforms)
 and select the correct operating system to install Docker Engine.
 
 Once complete, you should now be ready with the latest version of Docker, and can continue the guide.
 
-### Environment Files
+## Environment Files
 
 Before creating the Docker Compose configuration itself, let's define the environment variables for them:
 
 - Synapse:
 
-  ```ini,filepath=.synapse.env
+  ```ini title=".synapse.env"
   SYNAPSE_REPORT_STATS=no
   SYNAPSE_SERVER_NAME=mydomain.com
   UID=1000
@@ -33,14 +27,14 @@ Before creating the Docker Compose configuration itself, let's define the enviro
 
 - PostgreSQL:
 
-  ```ini,filepath=.postgres.env
+  ```ini title=".postgres.env"
   POSTGRES_DB=synapse
   POSTGRES_USER=synapse
   POSTGRES_PASSWORD=SuperSecretPassword
   POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
   ```
 
-### YAML Templating
+## YAML Templating
 
 Using [YAML Anchors](https://yaml.org/spec/1.2.2/#3222-anchors-and-aliases) lets you cut down the
 repeated lines in the config and simplify updating values uniformly.
@@ -51,7 +45,7 @@ an `&anchor` that you can then recall later as an `*alias`.
 It's not very simple to explain, so take a look at this example, where we establish basic settings
 for all containers, then upper-limits on CPU and RAM for sizes of container:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
 x-container-template: &container-template
   depends_on:
     - init-sockets
@@ -76,7 +70,7 @@ x-large-container: &large-container
 Now we've defined these, we can extend further with more specific templates, first defining what a
 Synapse container looks like, and variants for the two main types of worker:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
 x-synapse-template: &synapse-template
   <<: *medium-container
   depends_on:
@@ -116,7 +110,7 @@ x-postgres-template: &postgres-template
 
 Now this is done, we're ready to start actually defining resources!
 
-### Unix Sockets
+## Unix Sockets
 
 If all of your containers live on the same physical server, you can take advantage of [Unix sockets](https://en.wikipedia.org/wiki/Unix_domain_socket)
 to bypass the entire network stack when containers need to talk to each other.
@@ -129,7 +123,7 @@ change makes a very measurable visible difference to client performance for free
 First, let's define a volume to store the sockets. As the sockets are tiny, we can use `tmpfs` so
 it's stored in RAM to make the connections even faster and minimise disk load:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
 volumes:
   sockets:
     driver_opts:
@@ -140,7 +134,7 @@ volumes:
 I then recommend a tiny "init-sockets" container to run before the others to make sure the ownership
 and permissions are set correctly before the other containers start to try writing to it:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
 services:
   init-sockets:
     command:
@@ -156,11 +150,11 @@ services:
       - sockets:/sockets
 ```
 
-### Redis
+## Redis
 
 To use sockets, Redis requires an adjustment to the launch command, so we'll define that here:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
   redis:
     <<: *small-container
     command: redis-server --unixsocket /sockets/synapse_redis.sock --unixsocketperm 660
@@ -171,11 +165,11 @@ To use sockets, Redis requires an adjustment to the launch command, so we'll def
       - ./redis:/data
 ```
 
-### PostgreSQL Database
+## PostgreSQL Database
 
 Now we can define our PostgreSQL database:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
   db:
     <<: *postgres-template
     volumes:
@@ -183,10 +177,10 @@ Now we can define our PostgreSQL database:
       - ./pgsql16:/var/lib/postgresql/data
 ```
 
-And if you're following [my backups guide](../../postgres/backups/README.md), it's now as easy as
+And if you're following [my backups guide](../../postgres/backups/index.md), it's now as easy as
 this to deploy a replica:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
   db-replica:
     <<: *postgres-template
     environment:
@@ -206,11 +200,11 @@ You can change the paths from "pgsql" or "pgrep" if you prefer, just make sure t
 starting the first time, or you'll need to rename the directory on disk at the same time to avoid
 any data loss.
 
-### Synapse
+## Synapse
 
 With all of our templates above, Synapse itself is this easy:
 
-```yaml,icon=.devicon-docker-plain,filepath=docker-compose.yml
+```yaml title="docker-compose.yml"
   synapse:
     <<: *synapse-template
 ```

@@ -23,7 +23,7 @@ from, and can benefit from tuning to work efficiently with a write-heavy applica
 
 Here are the defaults:
 
-```ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+```ini title="postgresql.conf"
 autovacuum_analyze_scale_factor = 0.1
 autovacuum_vacuum_scale_factor = 0.2
 autovacuum_vacuum_cost_limit = -1 # uses value of vacuum_cost_limit
@@ -45,7 +45,7 @@ vacuum_cost_limit = 200
 
 Here is an example that would run operations more frequently:
 
-```ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+```ini title="postgresql.conf"
 autovacuum_analyze_scale_factor = 0.05
 autovacuum_vacuum_scale_factor = 0.02
 autovacuum_vacuum_cost_limit = 400

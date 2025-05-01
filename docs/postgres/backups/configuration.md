@@ -6,7 +6,7 @@
 
    Now, you'll likely want this at the bottom of your `postgresql.conf` to make sure it's ready to replicate:
 
-   ```ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+   ```ini title="postgresql.conf"
    hot_standby = on
    archive_mode = off
    wal_level = replica
@@ -53,7 +53,7 @@
    Now for the replica's `postgresql.conf`, add this to the bottom to tell it that it's a secondary
    and scale back its resource usage as it won't be actively serving clients:
 
-   ```ini,icon=.devicon-postgresql-plain,filepath=postgresql.conf
+   ```ini title="postgresql.conf"
    port = 5433
    hot_standby = on
    checkpoint_timeout = 30min

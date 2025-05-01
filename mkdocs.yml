@@ -16,7 +16,6 @@ extra:
       link: https://www.instagram.com/tomfos.tr
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/tomfostr/
-
 extra_css:
   - assets/stylesheets/extra.css
 extra_javascript:
@@ -32,6 +31,15 @@ markdown_extensions:
       options:
         custom_icons:
           - overrides/.icons
+  - pymdownx.highlight:
+      anchor_linenums: true
+      auto_title: true
+      line_spans: __span
+      linenums: true
+      linenums_style: pymdownx-inline
+      pygments_lang_class: true
+      use_pygments: true
+  - pymdownx.inlinehilite
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -123,6 +131,9 @@ theme:
   language: en
   features:
     - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
     - navigation.expand
     - navigation.indexes
     - navigation.instant
