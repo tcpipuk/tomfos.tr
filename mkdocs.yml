@@ -1,0 +1,172 @@
+site_name: Tom Foster
+site_url: https://tomfos.tr
+repo_name: tcpipuk/tomfos.tr
+repo_url: https://github.com/tcpipuk/tomfos.tr
+edit_uri: edit/live/docs
+copyright: |
+  Copyright © Tom Foster 2025<br>
+  Licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>
+exclude_docs: |
+  !.well-known
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/tcpipuk
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/tomfos.tr
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/tomfostr/
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - overrides/.icons
+  - pymdownx.highlight:
+      anchor_linenums: true
+      auto_title: true
+      line_spans: __span
+      linenums: true
+      linenums_style: pymdownx-inline
+      pygments_lang_class: true
+      use_pygments: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+nav:
+  - Home: index.md
+  - Matrix:
+      - matrix/index.md
+      - Continuwuity:
+          - matrix/continuwuity/index.md
+          - Configuration: matrix/continuwuity/config.md
+          - Docker Deployment: matrix/continuwuity/docker.md
+          - Reverse Proxies:
+              - matrix/continuwuity/reverse-proxies/index.md
+              - SSL: matrix/continuwuity/reverse-proxies/ssl.md
+              - Caddy: matrix/continuwuity/reverse-proxies/caddy.md
+              - Nginx: matrix/continuwuity/reverse-proxies/nginx.md
+      - LiveKit (Element Call):
+          - matrix/livekit/index.md
+          - Caddy Deployment (Official): matrix/livekit/caddy.md
+          - Nginx Deployment (Manual): matrix/livekit/nginx.md
+      - Synapse:
+          - matrix/synapse/index.md
+          - Docker Compose with Templates: matrix/synapse/docker.md
+          - Synapse Configuration: matrix/synapse/synapse.md
+          - PostgreSQL Configuration: matrix/synapse/postgres.md
+          - Nginx Configuration: matrix/synapse/nginx.md
+          - Worker Configuration: matrix/synapse/workers.md
+          - Extra Tips: matrix/synapse/extra-tips.md
+  - PostgreSQL:
+      - postgres/index.md
+      - Replication & Backups:
+          - postgres/backups/index.md
+          - Preparing Docker Compose: postgres/backups/preparing.md
+          - Configuration: postgres/backups/configuration.md
+          - Starting Replication: postgres/backups/replication.md
+          - Backup Script: postgres/backups/backups.md
+          - Conclusion: postgres/backups/conclusion.md
+      - Tuning:
+          - postgres/tuning/index.md
+          - Statistics Modules: postgres/tuning/statistics.md
+          - Worker Configuration: postgres/tuning/workers.md
+          - Memory Configuration: postgres/tuning/memory.md
+          - Query Planner Configuration: postgres/tuning/planner.md
+          - Maintenance: postgres/tuning/maintenance.md
+          - Checkpoints: postgres/tuning/checkpoints.md
+          - Disk Space: postgres/tuning/space.md
+          - Testing Methodology: postgres/tuning/testing.md
+          - Migrating Major Versions: postgres/tuning/versions.md
+          - Conclusion: postgres/tuning/conclusion.md
+  - Community: community.md
+  - Blog:
+      - blog/index.md
+plugins:
+  - blog:
+      archive_toc: true
+      archive_url_date_format: yyyy
+      archive_url_format: "{date}"
+      categories_toc: true
+      categories_url_format: "{slug}"
+      post_date_format: full
+      post_readtime: false
+      post_url_date_format: yyyy/MM
+      post_url_format: "{date}/{slug}"
+  - git-revision-date-localized:
+      enable_creation_date: false
+      type: date
+  - meta
+  - minify:
+      cache_safe: true
+      htmlmin_opts:
+        remove_comments: true
+      minify_css: true
+      minify_html: true
+      minify_js: true
+      css_files: []
+      js_files: []
+  - privacy
+  - redirects:
+      redirect_maps: { "coc": "community.html" }
+  - search
+  - social
+  - tags
+theme:
+  name: material
+  custom_dir: docs/overrides
+  language: en
+  features:
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - navigation.expand
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.prune
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.sections
+    - toc.follow
+    - toc.integrate
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme)"
+      scheme: slate
+      primary: green
+      accent: grey
+      toggle:
+        icon: material/auto-mode
+        name: Auto light/dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: green
+      accent: grey
+      toggle:
+        icon: material/lightbulb
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: green
+      accent: grey
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode

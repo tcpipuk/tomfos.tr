@@ -1,0 +1,7 @@
+authors:
+  tom:
+    name: Tom Foster
+    description: A person
+    avatar: https://tomfos.tr/images/tom.jpg
+    slug: tom
+    url: https://tomfos.tr
