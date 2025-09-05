@@ -122,4 +122,4 @@ LIMIT 10;
 !!! note
 
     For tips on how to have Synapse automatically reduce the size of your media files, see
-    [Extra Tips](../../synapse/extra-tips.md) in the [Synapse Deployment Guide](../../synapse/README.md).
+    [Extra Tips](../../matrix/synapse/extra-tips.md) in the [Synapse Deployment Guide](../../matrix/synapse/index.md).

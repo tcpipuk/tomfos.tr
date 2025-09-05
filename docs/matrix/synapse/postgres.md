@@ -3,7 +3,7 @@ title: Setting Up PostgreSQL for Synapse
 description: Get your PostgreSQL database purring for Matrix Synapse. Learn the essential configurations for optimal performance, whether using TCP or Unix sockets.
 ---
 
-# 3. PostgreSQL Configuration
+# PostgreSQL Configuration
 
 1. [Creating Database](#creating-database)
 2. [Configuring PostgreSQL](#configuring-postgresql)
@@ -115,7 +115,7 @@ This is quite a high spec configuration, designed for a server with over 16 core
 using SSD storage, so you may wish to consult [my tuning guide](../../postgres/tuning/workers.md)
 to decide on the best amount of workers and cache for your situation.
 
-If in doubt, it's better to be _more_ conservative, and increase values over time as needed - on a
+If in doubt, it's better to be *more* conservative, and increase values over time as needed - on a
 quad-core server with 8GB RAM, these would be reasonable values to start:
 
 ```ini title="postgresql.conf"

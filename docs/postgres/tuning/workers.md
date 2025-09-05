@@ -108,4 +108,4 @@ adjustments made to the database don't adversely impact Synapse's performance.
 
 Browse around your client's UI, scroll through room timelines, and monitor Synapse's logs and
 performance metrics to ensure everything behaves as expected. We'll cover this in more detail later
-in the [Testing Methodology](8-testing.md) section.
+in the [Testing Methodology](testing.md) section.

@@ -1,7 +1,7 @@
 site_name: Tom Foster
 site_url: https://tomfos.tr
-repo_name: tcpipuk/tomfos.tr
-repo_url: https://github.com/tcpipuk/tomfos.tr
+repo_name: tom/tomfos.tr
+repo_url: https://git.tomfos.tr/tom/tomfos.tr
 edit_uri: edit/live/docs
 copyright: |
   Copyright © Tom Foster 2025<br>
@@ -116,7 +116,7 @@ plugins:
       js_files: []
   - privacy
   - redirects:
-      redirect_maps: { "coc": "community.html" }
+      redirect_maps: { "coc.md": "community.md" }
   - search
   - social
   - tags

@@ -25,7 +25,7 @@ so feel free to study that first, but my recommended model is based on months of
 size servers to ensure they can efficiently cope with thousands of rooms and also rooms with tens of
 thousands of users in them, so I hope you will find it helps.
 
-I've also included an [explanation with a diagram](./README.md#model-explanation) at the bottom of
+I've also included an [explanation with a diagram](index.md#worker-model-explanation) at the bottom of
 this page to help explain the rationale behind this design, and why it makes the best use of
 available CPU & RAM.
 

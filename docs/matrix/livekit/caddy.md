@@ -10,7 +10,7 @@ about this method is that it bundles Caddy, which takes care of getting HTTPS ce
 as the reverse proxy automatically. It's a pretty streamlined approach, based on the
 [official LiveKit VM deployment docs](https://docs.livekit.io/home/self-hosting/vm/).
 
-If you haven't already, please review the [main LiveKit deployment guide](README.md) for
+If you haven't already, please review the [main LiveKit deployment guide](index.md) for
 prerequisites, firewall rules, and DNS configuration before proceeding. It covers the groundwork
 needed before you start generating configs here.
 
@@ -58,5 +58,5 @@ containing these essential files:
     docker compose up -d
     ```
 
-With the services running, return to the [main LiveKit deployment guide](README.md) to configure
+With the services running, return to the [main LiveKit deployment guide](index.md) to configure
 Matrix integration and learn about upgrading and troubleshooting.

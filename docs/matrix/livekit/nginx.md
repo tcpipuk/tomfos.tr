@@ -10,7 +10,7 @@ an Nginx reverse proxy you already manage. Compared to the Caddy generator, this
 to turn and fits better if Nginx is already part of your workflow for services like Synapse or
 Continuwuity.
 
-If you haven't already, please review the [main LiveKit deployment guide](README.md) for
+If you haven't already, please review the [main LiveKit deployment guide](index.md) for
 prerequisites, firewall rules, and DNS configuration before proceeding. Getting those right first
 will save potential headaches later.
 
@@ -170,5 +170,5 @@ server {
 2. Start the LiveKit container: `docker compose up -d`
 3. Check the logs to ensure it started correctly: `docker compose logs -f`
 
-With the services running and Nginx configured, return to the [main LiveKit deployment guide](README.md)
+With the services running and Nginx configured, return to the [main LiveKit deployment guide](index.md)
 to configure Matrix integration and learn about upgrading and troubleshooting.

@@ -1,0 +1,57 @@
+name: 🌐 Deploy site
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    name: 📖 Build and deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Checkout repo 📥
+        uses: https://github.com/actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Get system info 🔍
+        id: system-info
+        run: |
+          echo "python-version=$(python3 --version | cut -d' ' -f2)" >> $GITHUB_OUTPUT
+          echo "ubuntu-version=$(lsb_release -rs)" >> $GITHUB_OUTPUT
+
+      - name: Restore uv cache 💾
+        uses: https://github.com/actions/cache@v4
+        with:
+          path: ~/.cache/uv
+          key: uv-ubuntu${{ steps.system-info.outputs.ubuntu-version }}-${{ runner.arch }}-python${{ steps.system-info.outputs.python-version }}-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            uv-ubuntu${{ steps.system-info.outputs.ubuntu-version }}-${{ runner.arch }}-python${{ steps.system-info.outputs.python-version }}-
+
+      - name: Install MkDocs dependencies 🐍
+        run: |
+          uv venv .venv
+          uv pip install "mkdocs-material[imaging]" mkdocs-git-revision-date-localized-plugin mkdocs-minify-plugin mkdocs-redirects
+
+      - name: Build MkDocs 🏗️
+        run: |
+          source .venv/bin/activate
+          mkdocs build
+
+      - name: Update wrangler 📦
+        run: npm install --save-dev wrangler@latest
+
+      - name: Deploy to pages 🚀
+        id: deploy
+        uses: https://github.com/cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy site --project-name=tomfostr --branch=${{ github.head_ref }} --commit-dirty=true

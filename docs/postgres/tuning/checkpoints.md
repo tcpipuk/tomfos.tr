@@ -3,7 +3,7 @@ title: Tuning PostgreSQL Checkpoints and WAL
 description: Smooth out disk I/O! Learn to tune PostgreSQL checkpoints and Write-Ahead Logging (WAL) for improved performance and durability, crucial for demanding workloads like Matrix Synapse.
 ---
 
-# 6. Checkpoints and Replication
+# Checkpoints and Replication
 
 1. [Understanding WAL and Checkpoints](#understanding-wal-and-checkpoints)
 2. [Checkpoint Configuration](#checkpoint-configuration)
@@ -13,9 +13,9 @@ description: Smooth out disk I/O! Learn to tune PostgreSQL checkpoints and Write
 This section primarily deals with the performance options when committing data to disk.
 
 However, if you want to back up the database regularly without impacting the performance of the live
-database, consider setting up a dedicated replica - it won't _technically_ speed up PostgreSQL, but
+database, consider setting up a dedicated replica - it won't *technically* speed up PostgreSQL, but
 significantly decreases the performance impact of dumping the backup to disk, and backups typically
-complete faster too. You can find my guide on this [here](https://gist.github.com/tcpipuk/f68fb199ea8b1c1bdf48833fde86b418).
+complete faster too. You can find my guide on [PostgreSQL streaming replication setup](https://gist.github.com/tcpipuk/f68fb199ea8b1c1bdf48833fde86b418).
 
 ## Understanding WAL and Checkpoints
 
@@ -40,7 +40,7 @@ I/O.
 
 ## WAL Size Configuration
 
-For these values, you can use the query from the [Shared Buffers](3-memory.md#shared-buffers)
+For these values, you can use the query from the [Shared Buffers](memory.md#shared-buffers)
 section to see how much of the `shared_buffers` are consumed by new changes in the checkpoint
 window.
 
